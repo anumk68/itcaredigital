@@ -1,0 +1,43 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Block access to .env and sensitive files directly
+    RewriteRule ^(\.env|\.git|composer\.(json|lock))$ - [F,L]
+
+    # Redirect requests with index.php in the URL
+    RewriteCond %{THE_REQUEST} \s/index\.php [NC]
+    RewriteRule ^index\.php(.*)$ /$1 [R=301,L]
+
+  
+
+    # Prevent direct access to PHP files in storage and cache directories
+    RewriteRule ^(storage|bootstrap/cache)/.*\.php$ - [F,L]
+
+    # Restrict access to log and backup files
+    <FilesMatch "\.(log|bak|sql|swp)$">
+        Require all denied
+    </FilesMatch>
+
+    # Prevent redirection of static assets (CSS, JS, images)
+    RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|webp|woff2|woff|ttf|ico|mp4)$ [NC]
+
+    # Handle other public assets
+    RewriteCond %{REQUEST_URI} ^/public/(.*)$
+    RewriteRule ^public/(.*)$ /$1 [L,R=301]
+
+    # Redirect www to non-www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+    # Deny access to hidden files and directories starting with a dot
+    RewriteRule "(^|/)\." - [F]
+
+    # Don't rewrite requests for existing files and directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>

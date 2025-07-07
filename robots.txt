@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /privacy-policy
+Disallow: /terms-of-service
+
+Sitemap: https://allprintersetup.com/sitemap.xml 

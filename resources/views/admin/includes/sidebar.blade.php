@@ -48,6 +48,15 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('subscribe.index') }}">
+                    <div class="parent-icon">
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                    <div class="menu-title">Subscribers</div>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('assistance-index') }}">
                     <div class="parent-icon"><i class='bx bx-cookie'></i>
                     </div>
@@ -77,7 +86,7 @@
                     <div class="menu-title">Services</div>
                 </a>
             </li>
-			  <li>
+            <li>
                 <a href="{{ route('packages.index') }}">
                     <div class="parent-icon"><i class='bx bx-cookie'></i>
                     </div>
@@ -156,7 +165,8 @@
                 </div>
 
                 <div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
-                    <a href="avascript:;" class="btn d-flex align-items-center"><i class="bx bx-search"></i>Search</a>
+                    <a href="avascript:;" class="btn d-flex align-items-center"><i
+                            class="bx bx-search"></i>Search</a>
                 </div>
 
                 <div class="top-menu ms-auto">
@@ -168,11 +178,12 @@
                         </li>
                         <li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:void(0);"
-                                data-bs-toggle="dropdown"><img src="public/assets/images/county/02.png" width="22"
-                                    alt="">
+                                data-bs-toggle="dropdown"><img src="public/assets/images/county/02.png"
+                                    width="22" alt="">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:void(0);">
+                                <li><a class="dropdown-item d-flex align-items-center py-2"
+                                        href="javascript:void(0);">
                                         <img src="{{ asset('public/admin/assets/images/county/01.png') }}"
                                             width="20" alt="">
                                         <span class="ms-2">English</span></a>

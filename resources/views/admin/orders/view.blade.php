@@ -18,9 +18,9 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6"><strong>Phone:</strong> {{ $data->user->phone ?? '-' }}</div>
-                            <div class="col-md-6"><strong>Address:</strong> {{ $data->user->address ?? '-' }},
-                                {{ $data->user->city ?? '' }}, {{ $data->user->state ?? '' }},
-                                {{ $data->user->country ?? '' }} - {{ $data->user->zip_code ?? '' }}</div>
+                            <div class="col-md-6"><strong>Address:</strong> {{ $data->address ?? '-' }},
+                                {{ $data->city ?? '' }}, {{ $data->state ?? '' }},
+                                {{ $data->country ?? '' }} - {{ $data->zip ?? '' }}</div>
                         </div>
 
                         <h5 class="mb-3 border-bottom pb-2 mt-4">Order Information</h5>

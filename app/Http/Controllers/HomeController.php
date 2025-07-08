@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\SubscriptionConfirmationMail;
 use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\BrandSeries;
@@ -11,11 +12,13 @@ use App\Models\Package;
 use App\Models\Review;
 use App\Models\Service;
 use App\Models\Setting;
+use App\Models\Subscribe;
 use App\Models\User;
 use App\Models\Vlog;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Jenssegers\Agent\Agent;
 
@@ -104,7 +107,7 @@ class HomeController extends Controller
     {
         $packages = Package::where('status', 1)->latest()->get();
         $orders   = Order::with('user', 'package')->latest()->get();
-        return view('frontend.members', compact('packages','orders'));
+        return view('frontend.members', compact('packages', 'orders'));
 
     }
     public function cart($id)
@@ -130,7 +133,7 @@ class HomeController extends Controller
 
     public function account()
     {
-        $userid = auth()->guard('web')->user()->id;
+        $userid = auth()->guard('user')->user()->id;
         $orders = Order::where('user_id', $userid)->get();
         return view('frontend.account', compact('orders'));
     }
@@ -181,15 +184,23 @@ class HomeController extends Controller
     public function subscribe(Request $request)
     {
         $validated = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:subscribe,email',
         ]);
 
-        Mail::raw("New subscription request from: " . $validated['email'], function ($message) {
-            $message->to('contact@allprintersetup.com')
-                ->subject('New Subscription');
-        });
+        try {
+            $email = $validated['email'];
+            Mail::raw("New subscription from: $email", function ($message) use ($email) {
+                $message->to('contact@allprintersetup.com')
+                    ->subject('New Subscription');
+            });
+            Mail::to($email)->send(new SubscriptionConfirmationMail($email));
+            Subscribe::create(['email' => $email]);
 
-        return back()->with('success', 'Thanks for subscribing!');
+            return response()->json(['success' => 'Thanks for subscribing!']);
+        } catch (\Exception $e) {
+            Log::error('Subscribe email failed: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to send email. Try again later.'], 500);
+        }
     }
 
     //common function for common forms and section
@@ -443,17 +454,10 @@ class HomeController extends Controller
 
     public function logout(Request $request)
     {
-        // Log the user out using Auth facade
+
         Auth::logout();
 
-        // Invalidate the session
-        $request->session()->invalidate();
-
-        // Regenerate CSRF token to prevent session fixation
-        $request->session()->regenerateToken();
-
-                                                 // Redirect the user to the login page or home page
-        return redirect()->route('admin.login'); // Redirecting to the admin login route
+        return redirect()->route('admin.login');
     }
 
 }

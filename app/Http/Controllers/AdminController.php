@@ -29,12 +29,12 @@ class AdminController extends Controller
             'email.email' => 'Please enter a valid email address.',
             'password.required' => 'The password field is required.',
         ]);
- 
+
     $credentials = [
               'email' => $request->input('email'),
                  'password' => $request->input('password')
              ];
-       
+
             if (Auth::attempt($credentials)) {
                 // Authentication passed...
                 return redirect()->intended('admin/dashboard'); // Redirect to dashboard or intended page
@@ -44,11 +44,11 @@ class AdminController extends Controller
                     'password' => 'The provided password does not match our records.',
                 ])->withInput();
             }
-        
+
             return back()->withErrors([
                 'email' => 'No user found in the database.',
             ])->withInput();
-        
+
     }
 
     public function dashboardPage()
@@ -60,20 +60,16 @@ class AdminController extends Controller
         $descriptionsettings = Setting::where('type', 'like', 'description_%')->get();
         $titlesettings = Setting::where('type', 'like', 'title_%')->get();
         $keywordsettings = Setting::where('type', 'like', 'keyword_%')->get();
-    
+
         $sett = Setting::where('type', 'like', 'fields%')
                         ->orWhere('type', 'like', 'links%')
                         ->get();
-    
+
         // Fetch $settings if needed
         $settings = Setting::all(); // Or however you retrieve $settings
-    
+
         return view("admin.settings.index", compact('descriptionsettings', 'titlesettings', 'keywordsettings', 'sett', 'settings'));
     }
-    
-
-
-
 
  public function update(Request $request)
 {
@@ -98,7 +94,7 @@ class AdminController extends Controller
 
         // Find or create setting
         $settings = Setting::where('type', $type)->first();
-        
+
         if ($settings) {
             $settings->value = is_array($value) ? json_encode($value) : $value;
             $settings->save();
@@ -144,15 +140,15 @@ class AdminController extends Controller
     {
         // Fetch the specific setting by ID
         $setting = Setting::find($id);
-    
+
         if (!$setting) {
             return redirect()->route('metapage')->with('error', 'Setting not found');
         }
-    
+
         return view('admin.settings.edit', ['setting' => $setting]);
     }
 
-    
+
     public function updateSetting(Request $request)
     {
         $request->validate([
@@ -160,20 +156,20 @@ class AdminController extends Controller
             'type' => 'required|string',
             'value' => 'required|string',
         ]);
-    
+
         $setting = Setting::find($request->input('id'));
-    
+
         if (!$setting) {
             return redirect()->route('settings.index')->with('error', 'Setting not found');
         }
-    
+
         $setting->value = $request->input('value');
         $setting->save();
-    
+
         return redirect()->route('metaPage')->with('success', 'Setting updated successfully');
     }
-    
-    
+
+
 
 public function updateSettingForm(Request $request, $id){
 
@@ -205,7 +201,7 @@ public function new_meta_add(Request $request)
         'type' => 'string',
         'value' => 'string',
     ]);
-   
+
     $prefix = $request->input('metaselect');
 
     $name = str_replace(' ', '_', $request->type);
@@ -218,12 +214,12 @@ public function new_meta_add(Request $request)
     $settings->type = $prefixedName;
     $settings->value = $file_value;
     $settings->save();
-   
+
     return redirect()->back()->with('success', 'Setting added successfully.');
 }
 
-   
-    
-    
+
+
+
 
 }

@@ -56,7 +56,7 @@
                         @endif
 
                         <h4>Dashboard</h4>
-                        <p>Hello, <strong>{{ Auth::guard('web')->user()->name }}</strong></p>
+                        <p>Hello, <strong>{{ Auth::guard('user')->user()->name }}</strong></p>
                         <p>From your account dashboard you can check your recent orders, manage your address and edit your
                             account info.</p>
                     </div>
@@ -132,41 +132,41 @@
                             <div class="row mb-3">
                                 <div class="col-md-6 mb-2">
                                     <input type="text" class="form-control" name="name"
-                                        value="{{ Auth::user()->name ?? '' }}">
+                                        value="{{ Auth::guard('user')->user()->name ?? '' }}">
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <input type="email" class="form-control" name="email"
-                                        value="{{ Auth::user()->email ?? '' }}">
+                                        value="{{ Auth::guard('user')->user()->email ?? '' }}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6 mb-2">
                                     <input type="text" class="form-control" name="phone" placeholder="Phone"
-                                        value="{{ Auth::user()->phone ?? '' }}">
+                                        value="{{Auth::guard('user')->user()->phone ?? '' }}">
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <input type="text" class="form-control" name="zip_code" placeholder="Zip Code"
-                                        value="{{ Auth::user()->zip_code ?? '' }}">
+                                        value="{{ Auth::guard('user')->user()->zip_code ?? '' }}">
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <textarea class="form-control" name="address" rows="4" placeholder="Address">{{ Auth::user()->address ?? '' }}</textarea>
+                                <textarea class="form-control" name="address" rows="4" placeholder="Address">{{ Auth::guard('user')->user()->address ?? '' }}</textarea>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-4 mb-2">
                                     <input type="text" class="form-control" name="country" placeholder="Country"
-                                        value="{{ Auth::user()->country ?? '' }}">
+                                        value="{{ Auth::guard('user')->user()->country ?? '' }}">
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <input type="text" class="form-control" name="state" placeholder="State"
-                                        value="{{ Auth::user()->state ?? '' }}">
+                                        value="{{ Auth::guard('user')->user()->state ?? '' }}">
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <input type="text" class="form-control" name="city" placeholder="City"
-                                        value="{{ Auth::user()->city ?? '' }}">
+                                        value="{{ Auth::guard('user')->user()->city ?? '' }}">
                                 </div>
                             </div>
 

@@ -31,7 +31,7 @@ class AuthFrontendController extends Controller
         $user->password = Hash::make($request->password);
 
         if ($user->save()) {
-            Auth::guard('web')->login($user);
+            Auth::guard('user')->login($user);
             return redirect()->route('home')->with('success', 'Registered successfully!');
         } else {
             return redirect()->back()->with('error', 'Registration failed, please try again.');
@@ -53,14 +53,14 @@ class AuthFrontendController extends Controller
         $credentials = $request->only('email', 'password');
         $remember    = $request->has('remember');
 
-        if (Auth::guard('web')->attempt($credentials, $remember)) {
-            $user = Auth::guard('web')->user();
+        if (Auth::guard('user')->attempt($credentials, $remember)) {
+            $user = Auth::guard('user')->user();
 
             if ($user->role === 'user') {
                 return redirect()->route('home')->with('success', 'Logged in successfully!');
             }
 
-            Auth::guard('web')->logout();
+            Auth::guard('user')->logout();
             return redirect()->route('login_frontend')->with('error', 'Unauthorized role.');
         }
 
@@ -69,10 +69,7 @@ class AuthFrontendController extends Controller
 
     public function user_logout(Request $request)
     {
-        Auth::guard('web')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
+        Auth::guard('user')->logout();
         return redirect()->route('login_frontend')->with('success', 'Logged out successfully.');
     }
 
@@ -89,7 +86,7 @@ class AuthFrontendController extends Controller
             'city'     => 'nullable|string|max:100',
         ]);
 
-        $user = Auth::user();
+        $user = Auth::guard('user')->user();
 
         $user->name     = $request->name;
         $user->email    = $request->email;

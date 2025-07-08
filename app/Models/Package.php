@@ -27,6 +27,14 @@ class Package extends Model
 {
     return $this->hasMany(Review::class);
 }
+    public function review()
+{
+    return $this->hasMany(Review::class, 'package_id');
+}
+    public function orders()
+{
+    return $this->hasMany(Order::class, 'package_id');
+}
 
 }
 

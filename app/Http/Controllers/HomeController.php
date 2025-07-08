@@ -105,11 +105,14 @@ class HomeController extends Controller
     //members
     public function member()
     {
-        $packages = Package::where('status', 1)->latest()->get();
-        $orders   = Order::with('user', 'package')->latest()->get();
-        return view('frontend.members', compact('packages', 'orders'));
+        $packages = Package::with(['review' => function ($query) {
+            $query->where('status', 1);
+        }])->with('orders')->where('status', 1)->latest()->get();
 
+        $orders = Order::with('user', 'package')->latest()->get();
+        return view('frontend.members', compact('packages', 'orders'));
     }
+
     public function cart($id)
     {
         $package = Package::findOrFail($id);
@@ -238,7 +241,10 @@ class HomeController extends Controller
         $metaTitle       = Setting::where('type', 'title_home')->value('value');
         $metaDescription = Setting::where('type', 'description_home')->value('value');
         $metaKeywords    = Setting::where('type', 'keyword_home')->value('value');
-        $packages        = Package::where('status', 1)->latest()->get();
+
+        $packages = Package::with(['review' => function ($query) {
+            $query->where('status', 1);
+        }])->with(['orders'])->where('status', 1)->latest()->get();
 
         $orders = Order::with('user', 'package')->latest()->get();
         return view("frontend.index", compact('metaTitle', 'metaDescription', 'metaKeywords', 'isMobile', 'blogs', 'code', 'brands', 'packages', 'orders'));

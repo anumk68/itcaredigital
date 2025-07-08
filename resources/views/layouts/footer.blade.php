@@ -11,23 +11,16 @@
                     Do not lose your productivity. Our expert team offers troubleshooting, maintenance, and solutions
                     for all your printer-related issues.
                 </p>
-                <h6 class="fw-bold mt-4">Subscribe Now</h6>
-                <p>Don’t miss our future updates! Get Subscribed Today!</p>
-                <form id="subscribeForm" class="d-flex" action="{{ route('subscribe') }}" method="POST">
-                    @csrf
 
-                    <div class="d-flex flex-column w-100 me-2">
-                        <input type="email" name="email" id="subscribeEmail" class="form-control  me-2"
-                            placeholder="Your email"  >
-                        <small class="text-danger d-none" id="emailError"></small>
-                    </div>
+                <h6 class="followus">Follow Us</h6>
+                <div class="follow_us">
+                    <a href="https://www.youtube.com/@allprintersetup"> <i class="fa-brands fa-youtube"></i></a>
 
-                    <button type="submit" id="subscribeBtn" class="btn btn-light text-black ms-2 bt-sm">
-                        <span id="btnText">Subscribe</span>
-                        <span id="btnLoader" class="spinner-border spinner-border-sm d-none"></span>
-                    </button>
-                </form>
+                    <a href="https://x.com/allprintersetup"><i class="fa-solid fa-x"></i></a>
+                    <a href="https://www.facebook.com/allprintersetupusa/"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/allprintersetupusa/"><i class="fa-brands fa-instagram"></i></a>
 
+                </div>
 
             </div>
             <!-- Useful Links -->
@@ -90,15 +83,22 @@
                             href="mailto:contact@allprintersetup.com">contact@allprintersetup.com</a></li>
                     <li><i class="fa-solid fa-location-dot"></i> 1311 Park St Alameda, CA 94501</li>
                 </ul>
-                <h6 class="followus">Follow Us</h6>
-                <div class="follow_us">
-                    <a href="https://www.youtube.com/@allprintersetup"> <i class="fa-brands fa-youtube"></i></a>
+                <h6 class="fw-bold mt-4">Subscribe Now</h6>
+                <p>Don’t miss our future updates! Get Subscribed Today!</p>
+                <form id="subscribeForm" class="d-flex" action="{{ route('subscribe') }}" method="POST">
+                    @csrf
 
-                    <a href="https://x.com/allprintersetup"><i class="fa-solid fa-x"></i></a>
-                    <a href="https://www.facebook.com/allprintersetupusa/"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/allprintersetupusa/"><i class="fa-brands fa-instagram"></i></a>
+                    <div class="d-flex flex-column w-100 me-2">
+                        <input type="email" name="email" id="subscribeEmail" class="form-control  me-2"
+                            placeholder="Your email">
+                        <small class="text-danger d-none" id="emailError"></small>
+                    </div>
 
-                </div>
+                    <button type="submit" id="subscribeBtn" class="btn btn-light text-black ms-2 bt-sm">
+                        <span id="btnText">Subscribe</span>
+                        <span id="btnLoader" class="spinner-border spinner-border-sm d-none"></span>
+                    </button>
+                </form>
             </div>
         </div>
     </div>

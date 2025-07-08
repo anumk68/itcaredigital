@@ -51,7 +51,7 @@ a.fixed-call-btn:hover {
     color: #ffff;
 }
 .btn_member_btn {
-    text-align: end;
+    text-align: center;
 }
 section.cart_section .card-shadow {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -506,10 +506,12 @@ background: url('https://img.youtube.com/vi/JIDRK9gzTO0/maxresdefault.jpg');
       object-fit: cover;
     }
 
-    .notify-text {
-      font-size: 15px;
-      color: #555;
-    }
+.notify-text {
+    font-size: 15px;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
 
     .notify-text span {
       display: block;
@@ -517,9 +519,9 @@ background: url('https://img.youtube.com/vi/JIDRK9gzTO0/maxresdefault.jpg');
 .notify-text .name {
     color: #000;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 17px;
     text-decoration: underline;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 
   background: linear-gradient(270deg, #ff4e50, #f9d423);
   background-size: 400% 400%;
@@ -604,6 +606,10 @@ section.banner-section_contact {
 .heading_contact h1 {
     font-size: 38px;
     text-align: center;
+}
+
+form#subscribeForm .form-control {
+    padding: 10px .75rem !important;
 }
 /* -----------------start top-header ------------------------------*/
 .review-header img {

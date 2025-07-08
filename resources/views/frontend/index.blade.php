@@ -165,22 +165,25 @@
 
 
             <div class="row align-items-center">
-                <div class="col-md-9">
-                    <div class="sec-title-two pull-left">
+                <div class="col-md-12">
+                    <div class="sec-title-two text-center">
                         <h2 class="title">Flexible Plans for Reliable Printer Support </h2>
                     </div>
 
                 </div>
-                <div class="col-md-3">
-                    <div class="btn_member_btn">
-                        <a href="{{ route('members') }}" class="btn">See More</a>
-                    </div>
-                </div>
+
             </div>
-            <div class="row justify-content-center mt-4">
-
-
+              <div class="row justify-content-center">
                 @foreach ($packages as $package)
+                    @php
+                        $packageReviews = $package->review ?? collect();
+                        $average = $packageReviews->avg('rating');
+
+                        $rounded = round($average * 2) / 2;
+                        $count = $packageReviews->count();
+                          $subscriberCount = $package->orders->count();
+                    @endphp
+
                     <div class="col-md-3 mb-3">
                         <div class="plan">
                             <h3>{{ $package->package_name }}</h3>
@@ -189,19 +192,22 @@
 
                             <button class="select-btn">
                                 <a href="{{ route('package.detail', $package->slug) }}">Select Membership</a>
-
                             </button>
 
                             <div class="rating-review-box">
                                 <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <div class="reviews">24000+ Reviews</div>
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($rounded >= $i)
+                                            <i class="fas fa-star"></i>
+                                        @elseif ($rounded >= $i - 0.5)
+                                            <i class="fas fa-star-half-alt"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                    <div class="reviews">{{ $count }}+ Reviews</div>
                                 </div>
-                                <div class="reviewws">1L+ already Subscribed</div>
+                                <div class="reviewws">{{$subscriberCount}}+ already Subscribed</div>
                             </div>
 
                             <span class="toggle-link" onclick="toggleList(this)">Show More Features</span>
@@ -210,17 +216,18 @@
                                 @php
                                     $amenities = explode(',', $package->amenities);
                                 @endphp
-
                                 @foreach ($amenities as $amenity)
                                     <li>✓ {{ trim($amenity) }}</li>
                                 @endforeach
                             </ul>
-
-
                         </div>
                     </div>
                 @endforeach
 
+
+ <div class="btn_member_btn">
+                        <a href="{{ route('members') }}" class="btn">See More</a>
+                    </div>
             </div>
 
         </div>
@@ -439,12 +446,12 @@
                 <div class="printer-decor top-right"></div>
                 <div class="printer-decor bottom-left"></div>
 
+                <div class="notify-text">
                 <div class="notify-img">
                     <img src="{{ asset('public/images/icons8-happy.gif') }}" alt="">
                 </div>
-
-                <div class="notify-text">
-                    <span class="name">🎉 {{ ucfirst($order->user->name) }} just subscribed!</span>
+             <div class="rating_pricing">
+                       <span class="name">🎉 {{ ucfirst($order->user->name) }} just subscribed!</span>
 
                     @if ($order->amount)
                         <span class="plan mb-1">💰 ${{ $order->amount }} Plan</span>
@@ -457,6 +464,7 @@
                     @if ($order->package->package_name)
                         <span class="plan mb-1">📦 {{ $order->package->package_name }}</span>
                     @endif
+             </div>
 
                 </div>
             </div>
@@ -476,8 +484,6 @@
             </div>
         </div>
     @endif
-
-
 
     <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">

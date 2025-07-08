@@ -28,7 +28,7 @@ public function store(Request $request)
             'digits:10',
             'regex:/^[0-9]{10}$/'
         ],
-        'issue_description' => 'required|string|max:1000',
+        // 'issue_description' => 'required|string|max:1000',
         'service_slug' => 'nullable|string|max:100',
     ], [
         'name.regex' => 'Name must contain only letters and one space.',

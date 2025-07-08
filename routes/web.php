@@ -210,8 +210,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     //Subscribe
         Route::get('Subscribe', [SubscribeController::class, 'index'])->name('subscribe.index');
         Route::any('subscribe-delete/{id}', [SubscribeController::class, 'delete'])->name('subscribe.delete');
-
-
 });
 
 Route::any('/contact-add', [ContactController::class, 'contactstore'])->name('contact-add');

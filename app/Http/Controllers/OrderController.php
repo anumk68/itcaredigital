@@ -30,8 +30,8 @@ public function placeOrder(Request $request)
         'amount'    => 'required|numeric',
     ]);
 
-    if (Auth::check()) {
-        $user = Auth::user();
+    if (Auth::guard('user')->check()) {
+        $user = Auth::guard('user')->user();
     } else {
         $user = User::where('email', $request->email)->first();
         if (!$user) {

@@ -20,13 +20,13 @@
                 <div class="col-md-4 mb-3">
                     <div class="card h-100 shadow">
                         <a href="{{ route('video_detail', $vlog->slug) }}" class="card-img-top">
-                            <img src="{{ asset('public/images/dummy.webp') }}" alt="{{ $vlog->title }}" class="profile">
+                            <img src="{{ asset('storage/app/public/' . $vlog->meta_img) }}" alt="{{ $vlog->title }}" class="profile">
                         </a>
                         <div class="card-body">
                             <small class="text-muted">
                                 <i class="bi bi-calendar3"></i> 
                                 {{ \Carbon\Carbon::parse($vlog->created_at)->format('M d, Y') }}
-                                &nbsp; By {{ $vlog->meta_title ?? 'Admin' }}
+                                &nbsp; By {{ 'All Printer Setup' }}
                             </small>
                             <h5 class="card-title mt-2">
                                 <a href="{{ route('video_detail', $vlog->slug) }}" class="text-decoration-none text-dark">{{ $vlog->title }}</a>

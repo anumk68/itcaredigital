@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   
+
        public function up()
     {
         Schema::create('vlogs', function (Blueprint $table) {
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('blog_categories')->onDelete('set null');
         });
     }
-    
+
 
     /**
      * Reverse the migrations.

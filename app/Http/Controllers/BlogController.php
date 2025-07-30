@@ -38,6 +38,8 @@ class BlogController extends Controller
         $request->validate([
             'category_id' => 'required',
             'title'       => 'required|max:255',
+            'video_url' => 'nullable|url|max:255',
+
         ]);
         $blog = new Blog;
 
@@ -67,7 +69,7 @@ class BlogController extends Controller
         $blog->meta_description  = $request->meta_description;
         $blog->meta_keywords     = $request->meta_keywords;
         $blog->banner_alt        = $request->banner_alt;
-
+        $blog->video_url = $request->video_url;
         $blog->save();
         $this->addUrlToSitemap($blog);
 
@@ -98,10 +100,12 @@ class BlogController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'category_id' => 'required',
-            'title'       => 'required|max:255',
-        ]);
+       $request->validate([
+    'category_id' => 'required',
+    'title'       => 'required|max:255',
+    'video_url'   => 'nullable|url|max:255',
+]);
+
 
         $blog    = Blog::find($id);
         $slug    = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $request->slug));
@@ -122,6 +126,7 @@ class BlogController extends Controller
         $blog->meta_description  = $request->meta_description;
         $blog->meta_keywords     = $request->meta_keywords;
         $blog->banner_alt        = $request->banner_alt;
+        $blog->video_url = $request->video_url;
 
         // Update banner image if a new one is uploaded
         if ($request->hasFile('banner')) {

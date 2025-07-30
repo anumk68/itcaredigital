@@ -257,21 +257,21 @@
         });
     </script>
     <!------------------------------------------services_detail_banner--------------------------------------------->
-    <script>
-        (() => {
-            'use strict';
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        })();
-    </script>
+        {{-- <script>
+            (() => {
+                'use strict';
+                const forms = document.querySelectorAll('.needs-validation');
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            })();
+        </script> --}}
     <script>
         let currentStep = 1;
 
@@ -306,40 +306,6 @@
         }
     </script>
 
-    <!--
-    <script>
-        let currentStep = 1;
-
-        function showStep(step) {
-            document.querySelectorAll('.step').forEach((el, index) => {
-                el.classList.remove('active');
-            });
-            document.getElementById(`step${step}`).classList.add('active');
-            currentStep = step;
-        }
-
-        function nextStep() {
-            if (currentStep < 4) {
-                showStep(currentStep + 1);
-            }
-        }
-
-        function prevStep() {
-            if (currentStep > 1) {
-                showStep(currentStep - 1);
-            }
-        }
-
-        function selectOption(btn, group) {
-            document.querySelectorAll(`.btn-outline-custom`).forEach(el => {
-                if (el.parentElement.innerHTML === btn.parentElement.innerHTML) {
-                    el.classList.remove('active');
-                }
-            });
-            btn.classList.add('active');
-        }
-    </script>
-     -->
     <script>
         $(document).ready(function() {
             $(".review-carousel").owlCarousel({
@@ -441,53 +407,59 @@
             });
         });
     </script>
+<script>
+    $(document).ready(function () {
+        $('.inquiry-form').on('submit', function (e) {
+            e.preventDefault();
 
-    <script>
-        $(document).ready(function() {
-            $('.inquiry-form').on('submit', function(e) {
-                e.preventDefault();
+            let form = $(this);
+            let formId = form.attr('id');
+            let formPrefix = formId.split('_')[1];
+            let actionUrl = form.attr('action');
+            let formData = form.serialize();
+            let submitButton = form.find('button[type="submit"]');
 
-                let form = $(this);
-                let formId = form.attr('id'); // e.g. inquiryForm_service1
-                let formPrefix = formId.split('_')[1]; // service1
-                let actionUrl = form.attr('action');
-                let formData = form.serialize();
+            // Clear previous errors and messages
+            form.find('.text-danger').remove();
+            form.find('.is-invalid').removeClass('is-invalid');
+            $('#successMessage_' + formPrefix).addClass('d-none').text('');
+            $('#errorMessages_' + formPrefix).addClass('d-none').text('');
 
-                // Clear previous errors and messages
-                form.find('.text-danger').remove();
-                form.find('.is-invalid').removeClass('is-invalid');
-                $('#successMessage_' + formPrefix).addClass('d-none').text('');
-                $('#errorMessages_' + formPrefix).addClass('d-none').text('');
+            // Disable the submit button
+            submitButton.prop('disabled', true).text('Submitting...');
 
-                $.ajax({
-                    url: actionUrl,
-                    method: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        $('#successMessage_' + formPrefix)
+            $.ajax({
+                url: actionUrl,
+                method: 'POST',
+                data: formData,
+                success: function (response) {
+                    $('#successMessage_' + formPrefix)
+                        .removeClass('d-none')
+                        .text(response.message);
+                    form[0].reset();
+                },
+                error: function (xhr) {
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors;
+                        $.each(errors, function (field, messages) {
+                            let input = form.find('[name="' + field + '"]');
+                            input.addClass('is-invalid');
+                            input.after('<div class="text-danger">' + messages[0] + '</div>');
+                        });
+                    } else {
+                        $('#errorMessages_' + formPrefix)
                             .removeClass('d-none')
-                            .text(response.message);
-                        form[0].reset();
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 422) {
-                            let errors = xhr.responseJSON.errors;
-                            $.each(errors, function(field, messages) {
-                                let input = form.find('[name="' + field + '"]');
-                                input.addClass('is-invalid');
-                                input.after('<div class="text-danger">' + messages[0] +
-                                    '</div>');
-                            });
-                        } else {
-                            $('#errorMessages_' + formPrefix)
-                                .removeClass('d-none')
-                                .text('An error occurred. Please try again.');
-                        }
+                            .text('An error occurred. Please try again.');
                     }
-                });
+                },
+                complete: function () {
+                    // Always re-enable the button
+                    submitButton.prop('disabled', false).text('Submit');
+                }
             });
         });
-    </script>
+    });
+</script>
 
     <script>
         function openIframeModal(url) {
@@ -536,7 +508,7 @@
     </script>
     <!-- /*---------member dropdown cards-------------*/ -->
 
-    <script>
+    <!-- <script>
         document.querySelectorAll('.show-more').forEach(button => {
             button.addEventListener('click', function() {
                 const moreFeatures = this.nextElementSibling;
@@ -558,7 +530,41 @@
             list.classList.toggle('show');
             el.textContent = list.classList.contains('show') ? "Hide More Features" : "Show More Features";
         }
-    </script>
+    </script> -->
+  
+<script>
+  let allOpen = false;
+
+  document.querySelectorAll('.toggle-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const allWrappers = document.querySelectorAll('.feature-wrapper');
+      const allButtons = document.querySelectorAll('.toggle-btn');
+
+      if (!allOpen) {
+        // Open all
+        allWrappers.forEach(wrapper => {
+          wrapper.style.height = wrapper.scrollHeight + 'px';
+          wrapper.addEventListener('transitionend', function setAutoHeight() {
+            wrapper.style.height = 'auto';
+            wrapper.removeEventListener('transitionend', setAutoHeight);
+          });
+        });
+        allButtons.forEach(btn => btn.textContent = "Hide More Features ▲");
+        allOpen = true;
+      } else {
+        // Close all
+        allWrappers.forEach(wrapper => {
+          wrapper.style.height = wrapper.scrollHeight + 'px'; // Force recalc
+          requestAnimationFrame(() => {
+            wrapper.style.height = '0px';
+          });
+        });
+        allButtons.forEach(btn => btn.textContent = "Show More Features ▼");
+        allOpen = false;
+      }
+    });
+  });
+</script>
     <!-- -----------------------------------header dropdown close---------------------- -->
     <script>
         // Optional: Hide dropdown if clicked outside
@@ -638,7 +644,7 @@
         setTimeout(() => {
             currentBox.classList.remove('show');
             currentBox.style.display = 'none';
-        }, 5000);
+        }, 8000);
     }
 
     // Start after 2s
@@ -651,6 +657,211 @@
         }, 8000);
     }, 3000);
 </script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('toggleContactForm');
+    const closeBtn = document.getElementById('closeContactForm');
+    const contactForm = document.getElementById('contactForm');
+
+    toggleBtn.addEventListener('click', function() {
+        contactForm.classList.toggle('active');
+    });
+
+    closeBtn.addEventListener('click', function() {
+        contactForm.classList.remove('active');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!contactForm.contains(e.target) && e.target !== toggleBtn) {
+            contactForm.classList.remove('active');
+        }
+    });
+});
+</script>
+<!-- from hardeep sir -->
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script>
+    $(document).ready(function () {
+    $('.inquiry-form').each(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        const form = $(this);
+        const submitBtn = form.find('button[type="submit"]');
+        const successBox = $('#successMessage_' + form.attr('id').split('_')[1]);
+
+        submitBtn.prop('disabled', true);
+
+        // OTP SEND
+        form.find('.email-input').on('blur', function () {
+            const email = $(this).val().trim();
+            const otpSection = form.find('.otp-section');
+            const otpStatus = form.find('.otp-status');
+            const sendingStatus = form.find('.otp-send-status');
+
+            if (!email || form.data('otp-sent') === email) return;
+
+            sendingStatus.text('Sending OTP...').removeClass('text-danger text-success').show();
+
+            $.post("{{ route('send.otp.email') }}", { email }, function (res) {
+                form.data('otp-sent', email);
+                otpSection.removeClass('d-none');
+                otpStatus.text('');
+                showMessage(sendingStatus, res.message, 'text-success');
+            }).fail(function (xhr) {
+                const msg = xhr.responseJSON?.message || 'Failed to send OTP.';
+                showMessage(sendingStatus, msg, 'text-danger');
+            });
+        });
+
+        // VERIFY OTP
+        form.find('.verify-otp-btn').on('click', function () {
+            const email = form.find('.email-input').val().trim();
+            const otp = form.find('.otp-input').val().trim();
+            const otpStatus = form.find('.otp-status');
+
+            if (!otp) {
+                showMessage(otpStatus, 'Please enter OTP.', 'text-danger');
+                return;
+            }
+
+            $.post("{{ route('verify.otp.mail') }}", { email, otp }, function (res) {
+                showMessage(otpStatus, res.message, 'text-success');
+                // submitBtn.prop('disabled', false); // Uncomment if OTP also required to enable submit
+            }).fail(function (xhr) {
+                const msg = xhr.responseJSON?.message || 'Invalid OTP.';
+                showMessage(otpStatus, msg, 'text-danger');
+                // submitBtn.prop('disabled', true);
+            });
+        });
+
+        // FORM SUBMIT
+        form.on('submit', function (e) {
+            e.preventDefault();
+
+            const formData = form.serialize();
+            submitBtn.prop('disabled', true).text('Submitting...');
+            successBox.addClass('d-none').text('');
+            form.find('.invalid-feedback').text('');
+            form.find('.form-control, .form-select').removeClass('is-invalid');
+
+            $.post(form.attr('action'), formData)
+                .done(function (res) {
+                    showMessage(successBox, res.message, 'text-success');
+                    form[0].reset();
+                    form.find('.otp-section').addClass('d-none');
+                    form.find('.otp-status').text('');
+                    form.removeData('otp-sent');
+                    form.find('.phone-validation-message').addClass('d-none').text('');
+                    submitBtn.prop('disabled', true).text('Submit');
+                })
+                .fail(function (xhr) {
+                    if (xhr.status === 422) {
+                        const errors = xhr.responseJSON.errors;
+                        $.each(errors, function (field, msgs) {
+                            const input = form.find(`[name="${field}"]`);
+                            input.addClass('is-invalid');
+                            input.siblings('.invalid-feedback').text(msgs[0]);
+                        });
+                    } else {
+                        showMessage(successBox, 'Something went wrong. Please try again.', 'text-danger');
+                    }
+                    submitBtn.prop('disabled', false).text('Submit');
+                });
+        });
+
+        // Clear validation on change
+        form.find('.form-control, .form-select').on('input change', function () {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        });
+
+        // -------------------------------
+        // PHONE NUMBER VALIDATION ADDED
+        // -------------------------------
+        const phoneInput = form.find('input[name="phone_number"]');
+        const countryCodeSelect = form.find('select[name="country_code"]');
+        const phoneValidationMessage = form.find('.phone-validation-message');
+        const fullPhoneHidden = form.find('.full-phone');
+
+        function getNumericCountryCode(value) {
+            const match = value.match(/\+(\d+)/);
+            return match ? match[1] : '';
+        }
+
+        function validatePhoneNumberAndControlSubmit() {
+            const rawCode = countryCodeSelect.val();
+            const code = getNumericCountryCode(rawCode);
+            const phone = phoneInput.val().trim();
+
+            submitBtn.prop('disabled', true);
+            phoneValidationMessage.addClass('d-none').removeClass('text-danger text-success').text('');
+
+            if (!code || phone.length < 6) return;
+
+            const fullNumber = code + phone;
+            fullPhoneHidden.val(fullNumber);
+
+            const apiKey = 'a068b3f64311bb9c8fae73ec84ce36b9';
+            const apiUrl = `http://apilayer.net/api/validate?access_key=${apiKey}&number=${fullNumber}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.valid) {
+                        phoneValidationMessage
+                            .removeClass('text-danger')
+                            .addClass('text-success')
+                            .text('Number verified successfully.')
+                            .removeClass('d-none');
+
+                        submitBtn.prop('disabled', false);
+                    } else {
+                        phoneValidationMessage
+                            .removeClass('text-success')
+                            .addClass('text-danger')
+                            .text('Invalid phone number.')
+                            .removeClass('d-none');
+
+                        submitBtn.prop('disabled', true);
+                    }
+                })
+                .catch(() => {
+                    phoneValidationMessage
+                        .removeClass('text-success')
+                        .addClass('text-warning')
+                        .text('⚠️ Failed to validate number. Try again later.')
+                        .removeClass('d-none');
+
+                    submitBtn.prop('disabled', true);
+                });
+        }
+
+        // Trigger validation on blur/change
+        phoneInput.on('blur', validatePhoneNumberAndControlSubmit);
+        countryCodeSelect.on('change', validatePhoneNumberAndControlSubmit);
+    });
+
+    // Reusable message function
+    function showMessage(el, message, cls) {
+        el.removeClass('text-success text-danger text-warning d-none')
+            .addClass(cls)
+            .text(message)
+            .show();
+    }
+});
+</script>
+
 </body>
 
 </html>

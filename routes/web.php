@@ -18,10 +18,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceSupportController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\VlogsController;
-use App\Models\Subscribe;
 use Illuminate\Support\Facades\Route;
-
-use Illuminate\Support\Facades\Mail;
 
 Route::get('/printer/{brand_slug}', [HomeController::class, 'hp_printer'])->name('printer');
 Route::get('/service/{brand_slug}/{service_slug}', [HomeController::class, 'show'])->name('service_detail');
@@ -51,7 +48,7 @@ Route::any('/store-PrinterSupportForm', [ServiceSupportController::class, 'store
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/blogs', [HomeController::class, 'blog'])->name('blogs');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/get-support', [HomeController::class, 'contact'])->name('contact');
 Route::get('/epson-printer-suppport', [HomeController::class, 'epson_business'])->name('epson_business');
 Route::get('/canon-printer-support', [HomeController::class, 'epson_service'])->name('epson_service');
 // Route::get('/installation', [HomeController::class,'hprinter']);
@@ -87,16 +84,31 @@ Route::get('/blog-search/{term}', [BlogController::class, 'searchTitles'])->name
 
 //members route 23june,25
 
-Route::get('/members', [HomeController::class, 'member'])->name('members');
+Route::get('/printer-support-plans', [HomeController::class, 'member'])->name('members');
 Route::get('/carts/{id}', [HomeController::class, 'cart'])->name('cart');
 Route::get('/checkout/{id}', [HomeController::class, 'checkout'])->name('checkout');
 
-Route::get('/video', [HomeController::class, 'video'])->name('video');
+Route::get('/vlogs', [HomeController::class, 'video'])->name('video');
 Route::get('/vlog/{slug}', [HomeController::class, 'videoDetail'])->name('video_detail');
 
 Route::any('/register', [AdminController::class, 'register'])->name('register');
 Route::post('/inquiry', [InquiryController::class, 'store'])->name('inquiry.store');
 Route::post('/commonstore', [InquiryController::class, 'commonstore'])->name('commonstore.store');
+
+// routes from hardeep sir
+Route::post('/send-otp', [InquiryController::class, 'sendOtp'])->name('send.otp.email');
+Route::post('/verify-otp', [InquiryController::class, 'verifyOtp'])->name('verify.otp.mail');
+
+//========================Login Or Register With Otp Into One Form=====================//
+
+Route::post('/send-otps', [AdminController::class, 'sendOtp'])->name('send.otp');
+Route::post('/verify-register', [AdminController::class, 'verifyOtpAndRegister'])->name('verify.register');
+Route::post('/verify-login', [AdminController::class, 'verifyOtpAndLogin'])->name('verify.login');
+
+// Forgot Password Routes
+Route::post('/forgot-password/send-otp', [AdminController::class, 'sendForgotPasswordOtp'])->name('forgot.password.send.otp');
+Route::post('/forgot-password/verify-otp', [AdminController::class, 'verifyForgotPasswordOtp'])->name('forgot.password.verify.otp');
+Route::post('/forgot-password/reset', [AdminController::class, 'resetPassword'])->name('forgot.password.reset');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
@@ -202,14 +214,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('reviews', [ReviewController::class, 'reviews_list'])->name('reviews');
     Route::any('reviews.delete/{id}', [ReviewController::class, 'reviews_delete'])->name('reviews.delete');
     Route::post('/reviews/toggle-status/{id}', [ReviewController::class, 'reviewsStatusUpdate'])->name('reviews.toggleStatus');
-
+    Route::put('/reviews/{id}/update-date', [ReviewController::class, 'updateDate'])->name('reviews.updateDate');
     //orders
     Route::get('orders', [OrderController::class, 'orders_list'])->name('orders');
     Route::get('order-view/{id}', [OrderController::class, 'order_view'])->name('order.view');
 
     //Subscribe
-        Route::get('Subscribe', [SubscribeController::class, 'index'])->name('subscribe.index');
-        Route::any('subscribe-delete/{id}', [SubscribeController::class, 'delete'])->name('subscribe.delete');
+    Route::get('Subscribe', [SubscribeController::class, 'index'])->name('subscribe.index');
+    Route::any('subscribe-delete/{id}', [SubscribeController::class, 'delete'])->name('subscribe.delete');
+
+    //Customer inquery
+
+    Route::get('/inquiry-list', [ContactController::class, 'inquery_list'])->name('inquiry.list');
+    Route::get('/inquiry-detail/{id}', [ContactController::class, 'inquery_show'])->name('inquery.show');
+    Route::any('/inquery-destroy/{id}', [ContactController::class, 'inquery_destroy'])->name('inquery.destroy');
+
 });
 
 Route::any('/contact-add', [ContactController::class, 'contactstore'])->name('contact-add');
@@ -221,7 +240,6 @@ Route::post('/login', [AdminController::class, 'login'])->name('adminlogin');
 
 Route::post('/ckeditor/upload', [BlogController::class, 'uploadimage'])->name('ckeditor.upload');
 Route::get('/service/{slug}', [ServiceController::class, 'show'])->name('services.show');
-
 
 Route::get('/clear-route-cache', function () {
     \Artisan::call('route:clear');

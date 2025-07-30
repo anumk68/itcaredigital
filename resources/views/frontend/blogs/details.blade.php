@@ -55,8 +55,13 @@
                                             </div>
 
                                             <div id="noResponse" class="response-box response-error">
-                                            Watch detailed video here (https://youtu.be/JIDRK9gzTO0)
-                                            </div>
+                                            @if($blog->video_url)
+                                                Watch detailed video here: <a href="{{ $blog->video_url }}" target="_blank">{{ $blog->video_url }}</a>
+                                            @else
+                                                Thanks for your feedback.
+                                            @endif
+                                        </div>
+
                                         </div>
                                     <div class="flex_detail_blog_btn">
                                         <div class="btn_header_callnow text-center">

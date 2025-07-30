@@ -7,7 +7,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vlog;
 use App\Models\BlogCategory;
-use Illuminate\Support\Str; 
+use App\Models\Brand;
+use Illuminate\Support\Str;
 class VlogsController extends Controller
 {
     public function index()
@@ -19,7 +20,8 @@ class VlogsController extends Controller
     public function create()
     {
         $vlog_categories = BlogCategory::all();
-        return view('admin.vlogs.create', compact('vlog_categories'));
+          $brands = Brand::where('status', 'active')->get();
+        return view('admin.vlogs.create', compact('vlog_categories', 'brands'));
     }
 
    public function store(Request $request)
@@ -35,6 +37,7 @@ class VlogsController extends Controller
         'meta_description' => 'nullable|string|max:255',
         'meta_keywords' => 'nullable|string|max:255',
         'meta_img' => 'nullable',
+        'brand_id' => 'required',
     ]);
 
     $slug = Str::slug($request->slug);
@@ -55,6 +58,8 @@ class VlogsController extends Controller
         'meta_description' => $request->meta_description ?? '',
         'meta_keywords' => $request->meta_keywords ?? '',
         'meta_img' => $metaImage,
+        'blog_link' => $request->blog_link,
+        'brand_id' => $request->brand_id,
     ]);
 
     return redirect()->route('vlog.index')->with('success', 'Vlog created successfully!');
@@ -64,7 +69,9 @@ class VlogsController extends Controller
     {
         $vlog = Vlog::findOrFail($id);
         $vlog_categories = BlogCategory::all();
-        return view('admin.vlogs.edit', compact('vlog', 'vlog_categories'));
+          $brands = Brand::where('status', 'active')->get();
+
+        return view('admin.vlogs.edit', compact('vlog', 'vlog_categories','brands'));
     }
 
     public function update(Request $request, $id)
@@ -82,6 +89,8 @@ class VlogsController extends Controller
             'meta_description' => 'nullable',
             'meta_keywords' => 'nullable',
             'meta_img' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+             'blog_link' => 'nullable',
+             'brand_id' => 'required',
         ]);
 
         if ($request->hasFile('meta_img')) {

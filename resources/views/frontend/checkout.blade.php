@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<meta name="robots" content="noindex, nofollow" />
+
 
 @section('content')
     <section class="checkout_page py_8">
@@ -13,16 +13,19 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="text" name="name" class="form-control" placeholder="Name"
-                                    value="{{ Auth::check() ? Auth::user()->name : old('name') }}" required />
+                                    value="{{ Auth::guard('user')->check() ? Auth::guard('user')->user()->name : old('name') }}"
+                                    required />
                             </div>
                             <div class="col">
                                 <input type="email" name="email" class="form-control" placeholder="Email"
-                                    value="{{ Auth::check() ? Auth::user()->email : old('email') }}" required />
+                                    value="{{ Auth::guard('user')->check() ? Auth::guard('user')->user()->email : old('email') }}"
+                                    required />
                             </div>
                         </div>
                         <div class="mb-3">
                             <input type="text" name="phone" class="form-control" placeholder="Phone *"
-                                value="{{ Auth::check() ? Auth::user()->phone_no ?? '' : old('phone') }}" required />
+                                value="{{ Auth::guard('user')->check() ? Auth::guard('user')->user()->phone ?? '' : old('phone') }}"
+                                required />
                         </div>
                         <div class="mb-3">
                             <input type="text" name="address" class="form-control"
@@ -61,12 +64,10 @@
                         <div class="mb-3">
                             <textarea name="notes" class="form-control" rows="4" placeholder="Notes about your order..."></textarea>
                         </div>
-
                         <input type="hidden" name="package_id" value="{{ $package->id }}">
                         <input type="hidden" name="amount" value="{{ $package->price }}">
-
                         <button type="submit" class="btn btn-primary w-100">PLACE ORDER</button>
-                    </form>
+
 
                 </div>
 
@@ -95,6 +96,7 @@
                         <button class="btn btn-primary w-100">PLACE ORDER</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </section>

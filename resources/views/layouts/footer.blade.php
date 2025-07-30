@@ -2,30 +2,31 @@
     <div class="container">
         <div class="row g-4">
             <!-- Logo & Description -->
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="footer_logo">
+                    <a href="{{ route('home') }}">
                     <img src="{{ asset('public/images/all_print_logo.webp') }}" alt="Brother">
-
+                    </a>
                 </div>
                 <p class="mt-3">
                     Do not lose your productivity. Our expert team offers troubleshooting, maintenance, and solutions
                     for all your printer-related issues.
                 </p>
-
+ 
                 <h6 class="followus">Follow Us</h6>
                 <div class="follow_us">
                     <a href="https://www.youtube.com/@allprintersetup"> <i class="fa-brands fa-youtube"></i></a>
-
+ 
                     <a href="https://x.com/allprintersetup"><i class="fa-solid fa-x"></i></a>
                     <a href="https://www.facebook.com/allprintersetupusa/"><i class="fa-brands fa-facebook"></i></a>
                     <a href="https://www.instagram.com/allprintersetupusa/"><i class="fa-brands fa-instagram"></i></a>
-
+ 
                 </div>
-
+ 
             </div>
             <!-- Useful Links -->
             <!-- First 8 brands -->
-            <div class="col-md-2">
+            <div class="col-lg-2 col-md-6 col-sm-12">
                 <h6 class="fw-bold">Useful Links</h6>
                 <ul class="list-unstyled">
                     @foreach ($brands->take(8) as $brand)
@@ -35,19 +36,11 @@
                             </a>
                         </li>
                     @endforeach
-                </ul>
-            </div>
-
-            <!-- Next 8 brands -->
-            <div class="col-md-3">
-                <h6 class="fw-bold">More Printers</h6>
-                <ul class="list-unstyled">
-                    <li><a href="{{ route('blogs') }}">BLOGS</a></li>
-                    @php
+                     @php
                         $slicedBrands = $brands->slice(8, 8);
                         $specialSlug = 'installation-troubleshooting-printer';
                     @endphp
-
+ 
                     @foreach ($slicedBrands as $brand)
                         @if ($brand->slug !== $specialSlug)
                             <li>
@@ -66,18 +59,36 @@
                             </li>
                         @endif
                     @endforeach
-
                 </ul>
-
             </div>
-
+ 
+            <!-- Next 8 brands -->
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <h6 class="fw-bold">Knowledge Base</h6>
+                <ul class="list-unstyled">
+                    <li><a href="{{ route('blogs') }}">BLOGS</a></li>
+             
+                    <li><a href="{{ route('video') }}">VLOGS</a></li>
+                    <h6 class="fw-bold">Subscription</h6>
+                    <li><a href="{{ route('members') }}">PLANS</a></li>
+                         <h6 class="fw-bold">Company Details</h6>
+                    <li><a href="{{route('about') }}">ABOUT US</a></li>
+                    <li><a href="{{ route('contact') }}">GET SUPPORT</a></li>
+ 
+ 
+ 
+                   
+                </ul>
+ 
+            </div>
+ 
             <!-- Contact Info -->
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 col-sm-12">
                 <h6 class="fw-bold">Contact Us</h6>
                 <ul class="list-unstyled">
                     <li><i class="fa-solid fa-phone"></i><a href="tel:+1 8887684674">+1 8887684674</a></li>
                     <!--<li><i class="fa-solid fa-envelope">
-
+ 
                     </i> <a href="mailto:support@printertouch.com">support@printertouch.com</a></li>-->
                     <li><i class="fa-solid fa-envelope"></i> <a
                             href="mailto:contact@allprintersetup.com">contact@allprintersetup.com</a></li>
@@ -86,19 +97,19 @@
                 <h6 class="fw-bold mt-4">Subscribe Now</h6>
                 <p>Don’t miss our future updates! Get Subscribed Today!</p>
                 <form id="subscribeForm" class="d-flex" action="{{ route('subscribe') }}" method="POST">
-                    @csrf
-
-                    <div class="d-flex flex-column w-100 me-2">
-                        <input type="email" name="email" id="subscribeEmail" class="form-control  me-2"
-                            placeholder="Your email">
-                        <small class="text-danger d-none" id="emailError"></small>
-                    </div>
-
-                    <button type="submit" id="subscribeBtn" class="btn btn-light text-black ms-2 bt-sm">
-                        <span id="btnText">Subscribe</span>
-                        <span id="btnLoader" class="spinner-border spinner-border-sm d-none"></span>
-                    </button>
-                </form>
+    @csrf
+ 
+    <div class="d-flex flex-column w-100 me-2">
+        <input type="email" name="email" id="subscribeEmail" class="form-control me-2" placeholder="Your email">
+        <small class="text-danger d-none" id="emailError"></small>
+    </div>
+ 
+   <button type="submit" id="subscribeBtn" class="btn btn-light text-black ms-2 bt-sm" style="height: 48px;">
+    Subscribe
+</button>
+ 
+</form>
+ 
             </div>
         </div>
     </div>
@@ -122,25 +133,27 @@
         </div>
     </div>
 </footer>
-
-
+ 
+ 
 <section class="button_fixed">
-    <div class="container-fluid g-0">
-        <div class="btn_main_contact_us">
-            <a href="javascript:void(0);" class="team-btn">Contact Us</a>
-            <div class="contact-form">
-                <div class="form-container">
-                    @include('partials.common-form', [
-                        'brands' => $brands,
-                        'serviceSlug' => $service->slug ?? '',
-                        'prefix' => 'service16',
-                    ])
-                </div>
+    <div class="btn_main_contact_us">
+        <!-- Contact Us Button -->
+        <a href="javascript:void(0);" class="team-btn" id="toggleContactForm">Contact Us</a>
+       
+        <!-- Contact Form (hidden by default) -->
+        <div class="side-contact-form" id="contactForm">
+            <div class="form-container">
+                <span class="close-btn" id="closeContactForm">&times;</span>
+                @include('partials.common-form', [
+                    'brands' => $brands,
+                    'serviceSlug' => $service->slug ?? '',
+                    'prefix' => 'service16',
+                ])
             </div>
         </div>
     </div>
 </section>
-
+ 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="row align-items-center">
@@ -156,8 +169,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="modal_form_contain">
-
-
+ 
+ 
                             <div class="form-container">
                                 @include('partials.common-form', [
                                     'brands' => $brands,
@@ -165,8 +178,8 @@
                                     'prefix' => 'service15',
                                 ])
                             </div>
-
-
+ 
+ 
                         </div>
                     </div>
                 </div>
@@ -174,15 +187,15 @@
         </div>
     </div>
 </div>
-
+ 
 <!-- Modal -->
-
+ 
 <!-- jQuery and Owl Carousel JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+ 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+ 
 <script>
     $(document).ready(function() {
         $(".testimonial-slider").owlCarousel({
@@ -204,77 +217,68 @@
         });
     });
 </script>
-
 <script>
-    document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+    document.getElementById('subscribeForm').addEventListener('submit', function (e) {
         e.preventDefault();
-
+ 
         const form = this;
         const btn = document.getElementById('subscribeBtn');
         const emailInput = document.getElementById('subscribeEmail');
         const emailError = document.getElementById('emailError');
-        const btnText = document.getElementById('btnText');
-        const btnLoader = document.getElementById('btnLoader');
-
+ 
         // Reset UI
         emailError.textContent = '';
         emailError.classList.add('d-none');
-
         btn.disabled = true;
-        btnText.classList.add('d-none');
-        btnLoader.classList.remove('d-none');
-
+ 
         fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: emailInput.value,
-                })
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: emailInput.value,
             })
-            .then(async response => {
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw data;
-                }
-
-                // Success
-                form.reset();
-                showToast(data.success, 'success');
-            })
-            .catch(err => {
-                if (err.errors && err.errors.email) {
-                    emailError.textContent = err.errors.email[0];
-                    emailError.classList.remove('d-none');
-                } else {
-                    showToast('Something went wrong!', 'error');
-                }
-            })
-            .finally(() => {
-                btn.disabled = false;
-                btnText.classList.remove('d-none');
-                btnLoader.classList.add('d-none');
-            });
+        })
+        .then(async response => {
+            const data = await response.json();
+ 
+            if (!response.ok) {
+                throw data;
+            }
+ 
+            // Success
+            form.reset();
+            showToast(data.success, 'success');
+        })
+        .catch(err => {
+            if (err.errors && err.errors.email) {
+                emailError.textContent = err.errors.email[0];
+                emailError.classList.remove('d-none');
+            } else {
+                showToast('Something went wrong!', 'error');
+            }
+        })
+        .finally(() => {
+            btn.disabled = false;
+        });
     });
-
-    // Toast helper
+ 
     function showToast(message, type = 'success') {
         const bg = type === 'success' ? 'bg-success' : 'bg-danger';
         const toast = document.createElement('div');
         toast.className = `toast align-items-center text-white ${bg} border-0 show position-fixed bottom-0 end-0 m-3`;
         toast.style.zIndex = 9999;
         toast.innerHTML = `
-        <div class="d-flex">
-            <div class="toast-body">${message}</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
-    `;
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        `;
         document.body.appendChild(toast);
-
+ 
         setTimeout(() => toast.remove(), 3000);
     }
 </script>

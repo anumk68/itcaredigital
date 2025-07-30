@@ -1,7 +1,11 @@
 @extends('layouts.app')
-@section('head')
-    <meta name="robots" content="noindex, nofollow">
-@endsection
+
+@php
+    $metaTitle = $service->meta_title ?? $service->name;
+    $metaDescription = $service->meta_description ?? 'Learn more about our services.';
+    $metaKeywords = $service->meta_keyword ?? 'default, service, keywords';
+@endphp
+
 @section('content')
     <section class="banner_about py_8"
         style="
@@ -38,7 +42,7 @@
                                     <h4>Select Your Printer Series</h4>
                                     <div class="d-flex flex-wrap justify-content-center">
                                         @forelse ($seriesList as $series)
-                                        
+
                                             <button class="btn-option " onclick="selectOption(this, 'printerSeries')">
                                                 {{ $series }}
                                             </button>
@@ -106,31 +110,29 @@
 
         </div>
     </section>
-<!-- 
+
     <section class="image_banner_boottm py_8">
         <div class="container">
             <div class="single_image">
-                @if ($service->banner_image)
-              
-                                <img src="{{ asset('storage/app/public/' . $service->banner_image) }}"
-                                    alt="{{ $service->service_name }}" class="img-fluid mb-3">
-                            @endif
+         <img src="{{ asset('public/images/new_all_printersetup_ai_file_17july.jpg' ) }}"
+                     alt="{{ $service->service_name }}" class="img-fluid mb-3">
+                           
             </div>
         </div>
 
-    </section> -->
+    </section>
 
-    <section class="bloging_content py_8 pb-0">
+    <section class="bloging_content">
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
                     <div class="bloging_main_under">
-                        <div class="img_bloging">
-                            @if ($service->banner_image)
-                                <img src="{{ asset('storage/app/public/' . $service->banner_image) }}"
-                                    alt="{{ $service->service_name }}" class="img-fluid mb-3">
-                            @endif
-                        </div>
+                        <!--<div class="img_bloging">-->
+                        <!--    @if ($service->banner_image)-->
+                        <!--        <img src="{{ asset('storage/app/public/' . $service->banner_image) }}"-->
+                        <!--            alt="{{ $service->service_name }}" class="img-fluid mb-3">-->
+                        <!--    @endif-->
+                        <!--</div>-->
                         <div class="contant_under_bloging">
                             <p>{!! $service->description !!}</p>
 
@@ -182,10 +184,10 @@
                             </div>
                         </div>
 
-                     
+
 
                     <!-- //iframe -->
-                    <div id="iframeModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                    <div id="iframeModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
                         background-color: rgba(0, 0, 0, 0.7); z-index: 9999; justify-content: center; align-items: center;">
                         <div style="position: relative; width: 90%; max-width: 400px; height: 80%; background: #fff; border-radius: 10px; overflow: hidden;">
                             <button onclick="closeIframeModal()" style="position: absolute; top: 10px; right: 10px; z-index: 10000; background: #ff5a5a; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">X</button>
@@ -234,7 +236,7 @@
                                             <h4>Sarah M., Chicago, IL</h4>
                                             <div class="stars">★★★★★</div>
                                         </div>
-                            
+
                                     </div>
                                     <p class="review-text">
                                        I had constant printer spooler problems with my HP printer, and All Printer Setup sorted it out instantly. Their support staff was extremely friendly and online late at night when I desperately needed assistance.last line - I highly recommend All Printer Setup.
@@ -247,7 +249,7 @@
                                             <h4>Daniel R., Dallas, TX</h4>
                                             <div class="stars">★★★★★</div>
                                         </div>
-                            
+
                                     </div>
                                     <p class="review-text">
                                        “My Canon printer repeatedly disconnects from Wi-Fi. I rang All Printer Setup and received immediate assistance. They guided me through the repair step by step — top-notch printer connectivity service and fantastic service in general.”
@@ -260,7 +262,7 @@
                                             <h4>Melissa T., San Diego, CA</h4>
                                             <div class="stars">★★★★★</div>
                                         </div>
-                            
+
                                     </div>
                                     <p class="review-text">
                                     “Our office Epson printer needed regular maintenance, and these guys made it hassle-free. Their printer maintenance service is smooth, fast, and affordable. We'll keep using All Printer Setup for all our printer support services.”
@@ -306,7 +308,7 @@
                                                 href="#">{{ $blog->created_at->format('M d, Y') }}</a></li>
                                     </ul>
                                     <a href="{{ route('blog.blog_details', $blog->slug) }}">
-                                        <h3 class="blog-title">{{ Str::words($blog->title ?? '', 8, '...') }}</h3>
+                                        <h3 class="blog-title">{{ Str::words($blog->title ?? '', 6, '...') }}</h3>
                                     </a>
                                     <p class="blog-sort-desc">{{ Str::limit($blog->meta_description ?? '', 125, '...') }}
                                     </p>
@@ -355,7 +357,7 @@
             </div>
         </div>
     </section>
- 
+
 
 
 @endsection

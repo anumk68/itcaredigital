@@ -6,9 +6,9 @@
     <input type="hidden" name="service_slug" value="{{ old('service_slug', $service->slug ?? '') }}">
 
     <div class="row">
-        
-        
-        
+
+
+
         @php
     // Separate the special brand
     $specialBrand = $brands->firstWhere('brand_name', 'Installation and Troubleshooting');

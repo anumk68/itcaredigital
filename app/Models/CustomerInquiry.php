@@ -14,10 +14,12 @@ class CustomerInquiry extends Model
         'model_number',
         'name',
         'email',
+        'otp',
         'country_code',
         'phone_number',
         'service_slug',
         'issue_description',
+        'email_verified_at'
     ];
 }
 

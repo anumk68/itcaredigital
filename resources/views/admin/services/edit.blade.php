@@ -68,7 +68,27 @@
                             </div>
                         </div>
 
-                        <!-- Status defaults to 'active' in the database -->
+                       <div class="row mb-3">
+    <div class="col-md-12">
+        <label for="meta_title">Meta Title</label>
+        <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title', $service->meta_title) }}">
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <label for="meta_description">Meta Description</label>
+        <textarea name="meta_description" class="form-control" rows="3">{{ old('meta_description', $service->meta_description) }}</textarea>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <label for="meta_keyword">Meta Keywords</label>
+        <textarea name="meta_keyword" class="form-control" rows="2">{{ old('meta_keyword', $service->meta_keyword) }}</textarea>
+    </div>
+</div>
+
 
                         <div class="row mb-3">
                             <div class="col-md-12">

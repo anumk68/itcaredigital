@@ -17,10 +17,19 @@ class AdminManageUserController extends Controller
         $data = User::find($id);
         return view('admin.user.view' , compact('data'));
     }
-    public function delete_user($id)
-    {
-        $data = User::find($id);
-        $data->delete();
-        return back()->with('success', 'User deleted successfully!');
-    }
+public function delete_user($id)
+{
+    // Delete reviews directly
+    \DB::table('reviews')->where('user_id', $id)->delete();
+
+    // Delete orders directly
+    \DB::table('orders')->where('user_id', $id)->delete();
+
+    // Delete user
+    \DB::table('users')->where('id', $id)->delete();
+
+    return back()->with('success', 'User and related data deleted successfully!');
+}
+
+
 }

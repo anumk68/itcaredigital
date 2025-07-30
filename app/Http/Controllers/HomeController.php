@@ -24,7 +24,6 @@ use Jenssegers\Agent\Agent;
 
 class HomeController extends Controller
 {
-    // In your controller (e.g. HomeController.php)
 
     public function showHeader()
     {
@@ -48,7 +47,7 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
-        $faqs = Faq::where('brand_id', $brand->id)
+        $faqs = Faq::where('brand_id', $brand->id ?? '')
             ->where('status', 'active')
             ->get();
 
@@ -107,7 +106,7 @@ class HomeController extends Controller
     {
         $packages = Package::with(['review' => function ($query) {
             $query->where('status', 1);
-        }])->with('orders')->where('status', 1)->latest()->get();
+        }])->with('orders')->where('status', 1)->get();
 
         $orders = Order::with('user', 'package')->latest()->get();
         return view('frontend.members', compact('packages', 'orders'));
@@ -126,47 +125,49 @@ class HomeController extends Controller
     }
     public function videoDetail($slug)
     {
-        $vlog = Vlog::where('slug', $slug)->firstOrFail();
-
-        // Optionally: recent posts
+        $vlog = Vlog::with('brand')->where('slug', $slug)->firstOrFail();
         $recent_posts = Vlog::orderBy('created_at', 'desc')->limit(5)->get();
+        $services = Service::where('brand_id', $vlog->brand_id)->orderBy('created_at', 'desc')->limit(10)->get();
 
-        return view('frontend.video_detail', compact('vlog', 'recent_posts'));
+        return view('frontend.video_detail', compact('vlog', 'recent_posts', 'services'));
     }
 
     public function account()
     {
-        $userid = auth()->guard('user')->user()->id;
+        $userid = auth()->guard('user')->user()->id ?? '';
         $orders = Order::where('user_id', $userid)->get();
         return view('frontend.account', compact('orders'));
     }
 
     public function package_detail($slug)
     {
-        $package = Package::where('slug', $slug)->firstOrFail();
+        $packag = Package::with('review')->where('slug', $slug)->firstOrFail();
 
-        $packages = Package::where('slug', '!=', $slug)
-            ->where('status', 1)
-            ->latest()
-            ->take(4)
-            ->get();
-
-        // Get all reviews with user info manually (without relationship)
-        $reviews = Review::where('package_id', $package->id)
+        $reviews = Review::where('package_id', $packag->id)
             ->where('status', '1')
             ->get()
             ->map(function ($review) {
-                $review->user = User::find($review->user_id); // manually attach user
+                $review->user = User::find($review->user_id);
                 return $review;
             });
 
-        return view('frontend.package_detail', compact('package', 'packages', 'reviews'));
+        $packages = Package::where('slug', '!=', $slug)->with(['review' => function ($query) {
+            $query->where('status', 1);
+        }])->with('orders')->where('status', 1)->latest()->take(4)->get();
+
+        return view('frontend.package_detail', compact('packag', 'packages', 'reviews'));
     }
 
-    public function checkout($id)
+     public function checkout($id)
     {
-        $package = Package::findOrFail($id);
-        return view('frontend.checkout', compact('package'));
+        $user = auth()->guard('user')->check();
+        if ($user) {
+            $package = Package::findOrFail($id);
+            return view('frontend.checkout', compact('package'));
+        } else {
+            return redirect()->route('login_frontend');
+        }
+
     }
 
     public function suggestions(Request $request)

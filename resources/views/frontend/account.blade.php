@@ -56,7 +56,7 @@
                         @endif
 
                         <h4>Dashboard</h4>
-                        <p>Hello, <strong>{{ Auth::guard('user')->user()->name }}</strong></p>
+                        <p>Hello, <strong>{{ Auth::guard('user')->user()->name ?? '' }}</strong></p>
                         <p>From your account dashboard you can check your recent orders, manage your address and edit your
                             account info.</p>
                     </div>
@@ -145,30 +145,12 @@
                                     <input type="text" class="form-control" name="phone" placeholder="Phone"
                                         value="{{Auth::guard('user')->user()->phone ?? '' }}">
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <input type="text" class="form-control" name="zip_code" placeholder="Zip Code"
-                                        value="{{ Auth::guard('user')->user()->zip_code ?? '' }}">
-                                </div>
+                              
                             </div>
 
-                            <div class="mb-3">
-                                <textarea class="form-control" name="address" rows="4" placeholder="Address">{{ Auth::guard('user')->user()->address ?? '' }}</textarea>
-                            </div>
+                          
 
-                            <div class="row mb-3">
-                                <div class="col-md-4 mb-2">
-                                    <input type="text" class="form-control" name="country" placeholder="Country"
-                                        value="{{ Auth::guard('user')->user()->country ?? '' }}">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="text" class="form-control" name="state" placeholder="State"
-                                        value="{{ Auth::guard('user')->user()->state ?? '' }}">
-                                </div>
-                                <div class="col-md-4 mb-2">
-                                    <input type="text" class="form-control" name="city" placeholder="City"
-                                        value="{{ Auth::guard('user')->user()->city ?? '' }}">
-                                </div>
-                            </div>
+                     
 
                             <button type="submit" class="btn btn-primary">Save Changes</button>
                         </form>

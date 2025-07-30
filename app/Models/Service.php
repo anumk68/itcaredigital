@@ -17,7 +17,10 @@ class Service extends Model {
         'icon',
         'banner_image',
         'description',
-        'status'
+        'status',
+        'meta_title',
+        'meta_description',
+        'meta_keyword',
     ];
 
     public function brand() {

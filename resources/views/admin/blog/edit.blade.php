@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <form id="add_form" class="form-horizontal" action="{{ route('blog.update',$blog->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label">
                                     Blog Title
                                     <span class="text-danger">*</span>
@@ -37,14 +37,14 @@
                                     <input type="text" placeholder="Blog Title" onkeyup="makeSlug(this.value)" id="title" name="title" value="{{$blog->title}}" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label">Slug
                                     <span class="text-danger">*</span></label>
                                 <div class="col-md-9">
                                     <input type="text" placeholder="Slug" name="slug" id="slug" class="form-control" value="{{$blog->slug}}" required>
                                 </div>
                             </div>
-                            <div class="form-group row" id="category">
+                            <div class="form-group row mb-4" id="category">
                                 <label class="col-md-3 col-from-label">
                                     Category
                                     <span class="text-danger">*</span>
@@ -62,7 +62,7 @@
                             </div>
 
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label">Banner Alt
                                     <span class="text-danger">*</span></label>
                                 <div class="col-md-9">
@@ -71,7 +71,7 @@
                             </div>
 
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label" for="signinSrEmail">
                                     Banner
                                     {{-- <small>(1300x650)</small> --}}
@@ -91,8 +91,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row mb-4">
+                                <label class="col-md-3 col-form-label">Video URL</label>
+                                <div class="col-md-9">
+                                    <input type="url" name="video_url" class="form-control" placeholder="https://www.youtube.com/watch?v=..." value="{{ $blog->video_url }}">
+                                    <small class="text-muted">YouTube ya Vimeo video ka link yahan daalein</small>
+                                </div>
+                            </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label">
                                     Short Description
                                     <span class="text-danger">*</span>
@@ -102,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-from-label">
                                     Description
                                 </label>
@@ -112,14 +119,14 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label">Meta Title</label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="meta_title" value="{{$blog->meta_title}}" placeholder="Meta Title">
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label" for="signinSrEmail">
                                     Meta Image
                                     <small>(200x200)</small>
@@ -141,7 +148,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label">Meta Description</label>
                                 <div class="col-md-9">
                                     <textarea name="meta_description" id="meta_description" rows="5" class="form-control">{{$blog->meta_description}}</textarea>
@@ -150,7 +157,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-md-3 col-form-label">
                                     Meta Keywords
                                 </label>

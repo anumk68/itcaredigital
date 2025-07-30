@@ -41,6 +41,13 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('inquiry.list') }}">
+                    <div class="parent-icon"><i class='bx bx-help-circle'></i>
+                    </div>
+                    <div class="menu-title">Customer Inquery</div>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('contact-index') }}">
                     <div class="parent-icon"><i class='bx bx-cookie'></i>
                     </div>

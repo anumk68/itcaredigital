@@ -149,13 +149,19 @@
 
                 <!-- Desktop Right Side -->
                 <div class="d-none d-lg-flex align-items-center gap-2 position-relative">
-                    <input id="searchInput" class="form-control custom-search" type="search"
+               
+  <input id="searchInput" class="form-control custom-search" type="search"
                         placeholder="Search blogs, printers, services">
-
-                    <!-- Suggestion Dropdown -->
-                    <div id="searchDropdown" class="dropdown-menu show w-100 mt-2"
+                          <div id="searchDropdown" class="dropdown-menu show w-100 mt-2"
                         style="max-height: 250px; overflow-y: auto; display: none;">
                     </div>
+ <a href="{{ Auth::guard('user')->check() ? route('account') : route('login_frontend') }}">
+    <i class="fa-solid fa-user"></i>
+</a>
+
+
+                    <!-- Suggestion Dropdown -->
+                  
 
                     <!-- <a href="tel:8888752997" class="call-btn">Call Now</a> -->
                 </div>
@@ -170,10 +176,14 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <!-- Mobile Right Side: Search + Button -->
-            <div class="right-header d-lg-none">
+          <div class="right-header d-lg-none" style="
+    align-items: center;
+">
                 <input class="form-control custom-search form-control-sm" type="search"
                     placeholder="Search blogs" />
                 <a href="tel:8888752997" class="call-btn">Call Now</a>
+                <a href="#"> <i class="fa-solid fa-user"></i></a>
+                
             </div>
 
             <!-- Toggle -->
@@ -239,7 +249,9 @@
                 <!-- Desktop Right Side -->
                 <div class="d-none d-lg-flex align-items-center gap-2">
                     <input class="form-control custom-search" type="search" placeholder="Search blogs">
+                        
                     <a href="tel:8888752997" class="call-btn">Call Now</a>
+                     <i class="fa-solid fa-user"></i>
                 </div>
             </div>
         </div>

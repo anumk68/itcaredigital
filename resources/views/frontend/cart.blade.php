@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<meta name="robots" content="noindex, nofollow" />
+
 
 @section('content')
 <section class="cart_section">

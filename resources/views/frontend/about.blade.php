@@ -13,29 +13,28 @@
 @endif
 <section class="banner-section" style="background: linear-gradient(rgb(31 191 255 / 52%), rgb(31 191 255 / 52%)), url(public/images/about_bannner.png);">
    
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <!-- Left Content -->
-      <div class="col-lg-6">
-  <div class="banner_content">
-          <h1 class="display-5 fw-bold">About Us</h1>
-        <p class="mt-3">
-         All Printer Setup is your go-to expert for stress-free online Printer maintenance and support. We assist you in handling everything from paper jams and driver installation to network connectivity problems—swiftly and effectively. Our professional team keeps your Printer working optimally with effective solutions designed especially for your device and configuration. Whether it's any brand or model, we're here to make your printing experience easier and maintain your productivity.
-        </p>
-  
-  </div>
-      </div>
-
-      <!-- Right Form -->
-      <div class="col-lg-6">
-                    <div class="form-container">
-           @include('partials.common-form', [
-                        'brands' => $brands,
-                        'serviceSlug' => $service->slug ?? '',
-                        'prefix' => 'service5',
-                    ])
+    <div class="container">
+        <div class="row align-items-center g-5">
+        <!-- Left Content -->
+        <div class="col-lg-6">
+    <div class="banner_content">
+            <h1 class="display-5 fw-bold">About Us</h1>
+            <p class="mt-3">
+            All Printer Setup is your go-to expert for stress-free online Printer maintenance and support. We assist you in handling everything from paper jams and driver installation to network connectivity problems—swiftly and effectively. Our professional team keeps your Printer working optimally with effective solutions designed especially for your device and configuration. Whether it's any brand or model, we're here to make your printing experience easier and maintain your productivity.
+            </p>
+    
+    </div>
         </div>
-        
+
+        <!-- Right Form -->
+        <div class="col-lg-6">
+                        <div class="form-container">
+            @include('partials.common-form', [
+                            'brands' => $brands,
+                            'serviceSlug' => $service->slug ?? '',
+                            'prefix' => 'service5',
+                        ])
+    </div>
       </div>  
     </div>
   </div>

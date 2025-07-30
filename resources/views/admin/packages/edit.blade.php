@@ -47,7 +47,7 @@
                     <div class="form-group row mb-3">
                         <label class="col-md-3 col-form-label">Price <span class="text-danger">*</span></label>
                         <div class="col-md-9">
-                            <input type="number" name="price" class="form-control" value="{{ $package->price }}" step="0.01" required>
+                            <input type="text" name="price" class="form-control" value="{{ $package->price }}" step="0.01" required  placeholder="Enter price(s), use comma for multiple e.g. 999,1299">
                         </div>
                     </div>
 
@@ -84,12 +84,7 @@
                     </div>
 
                     <!-- Subscriptions -->
-                    <div class="form-group row mb-3">
-                        <label class="col-md-3 col-form-label">Subscriptions (User IDs)</label>
-                        <div class="col-md-9">
-                            <input type="text" name="subscriptions" class="form-control" placeholder="e.g. 1,2,3" value="{{ $package->subscriptions }}">
-                        </div>
-                    </div>
+                   
 
                     <!-- Status -->
                     <div class="form-group row mb-3">
@@ -101,6 +96,32 @@
                             </select>
                         </div>
                     </div>
+
+              <!-- Label Type -->
+<div class="form-group row mb-3">
+    <label class="col-md-3 col-form-label">Package Type</label>
+    <div class="col-md-9 d-flex flex-wrap gap-3">
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="package_type" id="none" value="none"
+                {{ $package->package_type == 'none' ? 'checked' : '' }}>
+            <label class="form-check-label" for="none">None</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="package_type" id="recommended" value="recommended"
+                {{ $package->package_type == 'recommended' ? 'checked' : '' }}>
+            <label class="form-check-label" for="recommended">Recommended</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="package_type" id="limited" value="limited"
+                {{ $package->package_type == 'limited' ? 'checked' : '' }}>
+            <label class="form-check-label" for="limited">Limited Time Offer</label>
+        </div>
+
+    </div>
+</div>
 
                     <!-- Submit Button -->
                     <div class="form-group mb-0 text-right">

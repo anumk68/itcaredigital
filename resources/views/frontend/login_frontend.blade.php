@@ -1,5 +1,4 @@
 @extends('layouts.app')
-<meta name="robots" content="noindex, nofollow" />
 
 @section('content')
 <section class="user_login py_8">

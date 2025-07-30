@@ -1,3 +1,12 @@
+
+
+i.fa-solid.fa-user {
+    color: #fff;
+    font-size: 20px;
+}
+
+
+
 /*----------------------7-1-2025-----------------------------*/
 .call_number {
   opacity: 0;
@@ -135,7 +144,7 @@ section.video_main_ban .btn_video a {
       position: relative;
       width: 100%;
       padding-top: 56.25%;
-background: url('https://img.youtube.com/vi/JIDRK9gzTO0/maxresdefault.jpg');
+/*background: url('https://img.youtube.com/vi/JIDRK9gzTO0/maxresdefault.jpg');*/
       border-radius: 10px;
       overflow: hidden;
     }
@@ -584,9 +593,8 @@ background: url('https://img.youtube.com/vi/JIDRK9gzTO0/maxresdefault.jpg');
      background: linear-gradient(135deg, #1ca9e6, #00cfff);
 }
 
-.py_8{
-  padding:80px 0;
-
+.py_8 {
+    padding: 80px 0;
 }
 h2{
   font-weight: 700 !important;
@@ -643,6 +651,9 @@ form#subscribeForm .form-control {
     margin-bottom: 0;
     font-size: 21px;
     font-weight: 600;
+}
+.banner-section_contact img{
+  width: 100%;
 }
 /* -----------------end top-header ------------------------------*/
 
@@ -822,6 +833,26 @@ header .container, .container-lg, .container-md, .container-sm, .container-xl {
 }
             }
     @media (max-width: 991.98px) {
+      .remote_support .border_line {
+    display: block !important;
+}
+      .row {
+     margin-right: 0;
+    margin-left:0;
+}
+      footer.footer {
+    text-align: center;
+}
+footer.footer p {
+    max-width: 299px;
+    margin: auto;
+}
+footer .follow_us {
+    display: flex;
+    gap: 18px;
+    margin-top: 20px;
+    justify-content: center;
+}
       .services-submenu {
     display: none;
     top: 100%;
@@ -975,6 +1006,11 @@ a.call-btn {
             .mobile_header{
               display: block;
             }
+            .fixed-call-btn {
+    position: fixed;
+    top: 83%;
+
+}
         }
 
 
@@ -983,21 +1019,56 @@ a.call-btn {
       max-width: 117px !important;
     width: 100% !important;
 }
-.form-container h4 {
+.fixed-call-btn {
+    position: fixed;
+    top: 83%;
+
+}
+section.button_fixed .form-container h4 {
     text-align: center;
     margin-bottom: 20px;
     color: #1fbfff;
-    font-size: 22px !important;
+    font-size: 16px !important;
     font-weight: 700;
+}
+.form-container p {
+    color: #000;
+    text-align: center;
+    font-size: 11px;
 }
 section.button_fixed .btn_main_contact_us .form-container {
     background-color: #fff;
-    padding: 30px;
+    padding: 11px;
     border-radius: 10px;
     color: white;
     max-width: 300px;
     width: 100%;
     box-shadow: 0 0 9px #000;
+}
+
+.button_fixed .side-contact-form {
+    position: absolute;
+    left: 24px;
+    padding: 20px;
+    width: 350px;
+    /* background: white; */
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+    /* border-radius: 8px; */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: all 0.4s ease;
+    z-index: 999;
+}
+.button_fixed .close-btn {
+    position: absolute;
+    top: 19px;
+    right: 37px;
+    font-size: 32px;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
 }
     }
 
@@ -1354,7 +1425,7 @@ footer .follow_us i {
     background: #fff;
     color: #000;
     padding: 8px;
-    border-radius: 42px;
+    border-radius: 20%;
 }
 footer .follow_us {
     display: flex;
@@ -1497,7 +1568,7 @@ section.bloging_content {
 .social_icon_main .follow_us i {
     background: #29c3f0;
     padding: 10px;
-    border-radius: 50px;
+    border-radius: 20%;
     font-size: 23px;
     color: #fff;
 }
@@ -1576,6 +1647,7 @@ section.bloging_content {
   color: #333;
   line-height: 1.6;
   text-align: left;
+  font-weight: 400;
 }
 .review-card svg {
     width: 100%;
@@ -1788,20 +1860,23 @@ section.privacy-section {
     margin: 10px 5px 0;
 }
 /*--------------------------------------------------------------------blog-left-popup-----------------------------------------------------------------*/
+
+
 .button_fixed {
     position: fixed;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     z-index: 9999;
-  }
+}
 
-  section.button_fixed .btn_main_contact_us {
+section.button_fixed .btn_main_contact_us {
     position: relative;
     display: flex;
     align-items: center;
-  }
-  section.button_fixed .team-btn {
+}
+
+section.button_fixed .team-btn {
     background: #1fbfff;
     color: #fff;
     padding: 10px 20px;
@@ -1814,75 +1889,117 @@ section.privacy-section {
     position: relative;
     left: 0px;
     transition: all 0.3s ease;
-  }
-  section.button_fixed a.team-btn:hover {
+    cursor: pointer;
+}
+
+section.button_fixed a.team-btn:hover {
     color: #fff;
     text-decoration: none;
-  }
+}
 
-  section.button_fixed .contact-form {
+/* Side Contact Form Styles */
+.side-contact-form {
     position: absolute;
-    left: 60px;
-    padding: 0px;
-    width: 400px;
+    left: 47px;
+    padding: 20px;
+    width: 350px;
+    /* background: white; */
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+    /* border-radius: 8px; */
     opacity: 0;
     visibility: hidden;
     transform: translateX(-20px);
     transition: all 0.4s ease;
     z-index: 999;
-    border-radius: 10px;
-  }
-  .faq_images img {
-    width: 100%;
 }
-  .flex_detail_blog_btn {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-  }
-  section.button_fixed .contact-form .title h2 {
-    color: #43c3ea;
-    font-weight: 700;
-  }
 
-  section.button_fixed .btn_main_contact_us:hover .contact-form,
-  .btn_main_contact_us:focus-within .contact-form {
+.side-contact-form.active {
     opacity: 1;
     visibility: visible;
     transform: translateX(0);
-  }
+}
 
-  .form_popup_class input {
+.close-btn {
+    position: absolute;
+    top: 19px;
+    right: 26px;
+    font-size: 32px;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+/* Form Styles */
+
+.faq_images img {
+    width: 100%;
+}
+
+.flex_detail_blog_btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.form_popup_class input {
     border: 1px solid #ececec;
     color: #999999;
     display: block;
     font-size: 14px;
     width: 100%;
     transition: all 500ms ease;
-  }
-  .form_popup_class textarea{
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.form_popup_class textarea {
     border: 1px solid #ececec;
     color: #999999;
     display: block;
-    padding: 0 20px;
+    padding: 10px;
     width: 100%;
     transition: all 500ms ease;
-  }
+    margin-bottom: 15px;
+    resize: vertical;
+    min-height: 100px;
+    border-radius: 4px;
+}
 
-  .form_popup_class button.thm-btn.bg-1 {
-    padding: 17px 15px 16px;
-  }
+.form_popup_class button.thm-btn.bg-1 {
+    padding: 12px 20px;
+    background: #1fbfff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+section.button_fixed .form-container h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1fbfff;
+    font-size: 21px;
+    font-weight: 700;
+}
+.form_popup_class button.thm-btn.bg-1:hover {
+    background: #19a7e0;
+}
 
-  .form_popup_class button.thm-btn.bg-1:hover{
-  color: #000;
-  }
-
-  section.button_fixed .contact-form .title h2 {
+.side-contact-form .title h2 {
+    color: #43c3ea;
+    font-weight: 700;
     text-align: center !important;
     font-size: 22px !important;
     margin-bottom: 25px !important;
-  }
-
+}
 
   /*-------------------------------------------------------------------popup-left------------------------------*/
   section.single_blog_page .blog-card img {
@@ -2478,6 +2595,7 @@ section.member_pricing .plan {
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       position: relative;
       transition: all 0.3s ease;
+      height:100%;
     }
 
    section.member_pricing .recommended {
@@ -2642,6 +2760,7 @@ section.member_pricing .plan {
     font-size: 15px;
 }
 
+
 .btn_member {
     border: 1px solid #0D9FEC;
     padding: 10px;
@@ -2663,12 +2782,12 @@ section.member_pricing .plan {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   transform: translateY(-5px); /* optional: slight upward move without scaling */
 }
-@media (max-width: 991.98px) {
+@media (max-width: 1400px) {
   .section_issue img {
     max-width: 100%;
     height: auto;
     margin-bottom: 20px;
-  }
+}
 
   .section_issue h3 {
     font-size: 1.5rem;
@@ -2678,6 +2797,7 @@ section.member_pricing .plan {
     font-size: 1rem;
   }
 }
+
 
 
 @media (max-width: 767.98px) {
@@ -3079,4 +3199,287 @@ section.member_pricing .plan {
 }
 .write_review_btn button {
     border: none;
+}
+
+
+  .share-icons {
+      margin-top: 8px;
+    }
+
+    .share-icons a {
+      margin-right: 12px;
+      text-decoration: none;
+      color: #000;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    .share-icons a:hover {
+      color: #0077b5; /* LinkedIn Blue */
+    }
+
+    .share-section .social_icon_main .follow_us {
+    display: flex;
+    gap: 25px;
+    justify-content: start;
+}
+.content-box p {
+    text-align: justify;
+}
+.faq-item p {
+    text-align: justify;
+}
+.contant_under_bloging p {
+    text-align: justify;
+}
+
+.flexiable {
+    text-align: center;
+    margin-top: -22px;
+}
+
+.rating-review-box {
+    margin-top: 73px;
+}
+
+
+
+
+  /*--------------------------------------------
+  */
+
+  section.plan-section .page-header {
+    background: #0284c7;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  section.plan-section .page-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  /* Section Layout */
+  section.plan-section .pricing-section {
+    max-width: 1320px;
+    margin: auto;
+    padding: 2rem 1rem;
+  }
+  .plan-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+  }
+  section.plan-section .label-box {
+    writing-mode: vertical-rl;
+    background: #3c90b4;
+    color: white;
+    padding: 1rem 0.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 40px;
+  }
+  
+  /* Cards */
+  section.plan-section .card-container {
+    flex: 1;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  section.plan-section .card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  section.plan-section .card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  section.plan-section .card .price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0284c7;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  section.plan-section .card p {
+      text-align: center;
+  }
+  section.plan-section .card h3 {
+      text-align: center;
+  }
+  section.plan-section .select-btn {
+    background-color: #3c90b4;
+    color: white;
+    padding: 0.6rem;
+    border: none;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    /* margin-top: auto; */
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  section.plan-section .select-btn:hover {
+    background-color: #3c90b4;
+  }
+  section.plan-section .features-link {
+    text-align: center;
+    color: #2563eb;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  /* Badges */
+  section.plan-section .badge {
+      position: absolute;
+      top: -8px;
+      left: 0px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.3rem 0.5rem;
+      border-radius: 5px;
+      color: #fff;
+      width: 100%;
+  }
+  section.plan-section .popular {
+    background: #facc15;
+    color: #000;
+  }
+  section.plan-section .recommended {
+    background: #ffc107;
+  }
+  section.plan-section .limited {
+    background: #ffc107;
+  }
+  section.plan-section .container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  section.plan-section .card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  section.plan-section .rating-review-box {
+      text-align: center;
+      margin-top: 17px;
+  }
+  main.pricing-section .features-toggle {
+    margin-top: 10px;
+  }
+  
+  /* Center the button */
+  .toggle-btn-wrapper {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  main.pricing-section .toggle-btn {
+    background: none;
+    color: #0077cc;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.4rem 1rem;
+  }
+  
+  /* Expand/collapse animation */
+  main.pricing-section .feature-wrapper {
+    overflow: hidden;
+    transition: height 0.4s ease;
+    height: 0;
+  }
+  
+  /* List styles */
+  main.pricing-section .feature-list {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    padding-left: 0;
+    text-align: left;
+  }
+  
+  main.pricing-section .feature-list li {
+    margin: 0.3rem 0;
+    position: relative;
+    padding-left: 0;
+  }
+  
+  .price-box {
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+  }
+  
+  .original-price {
+    text-decoration: line-through !important;
+    color: #e70000;
+    margin-right: 0.5rem;
+  }
+  
+  .discounted-price {
+      color: #0077cc;
+      font-size: 23px;
+  }
+  @media (max-width: 1024px) {
+    section.plan-section .card-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+  section.plan-section .card-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* Responsive vertical label stack on small screens */
+  @media (max-width: 768px) {
+
+    section.plan-section .plan-section {
+      flex-direction: column;
+    }
+    section.plan-section .label-box {
+      writing-mode: horizontal-tb;
+      width: 100%;
+      text-align: left;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    section.plan-section .remote_support .border_line {
+      display: block;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+  }
+  section.plan-section .border_line p {
+      text-align: center;
+  }
+  section.plan-section .remote_support img {
+      height: 83%;
+      max-height: 99px;
+  }
+  }
+
+  /*-------------------redirections--------------------------------*/
+  .priter-all-serv-mainnn-img img {
+    width: 100%;
+}
+.services-mnn-seccchdd h2 {
+    margin-bottom: 23px;
+}
+.background_color_all_sec {
+    background: #152545;
+}
+.priter-all-serv-mainnn-cnttt {
+    color: #fff;
 }

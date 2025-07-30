@@ -85,7 +85,15 @@
                                     <td>{{ $item->package->package_name }}</td>
                                     <td>{{ $item->rating }}</td>
 
-                                    <td>{{ $item->created_at->format('M d, Y') }}</td>
+                                    <td>
+    <span class="date-text">{{ $item->created_at->format('M d, Y') }}</span>
+    <button class="btn btn-sm btn-primary open-date-modal"
+        data-id="{{ $item->id }}"
+        data-date="{{ $item->created_at->format('Y-m-d') }}"
+        data-url="{{ route('reviews.updateDate', $item->id) }}">
+        Edit
+    </button>
+</td>
                                     <td>
                                         @if ($item->status == '1')
                                             <span class="badge bg-success fw-bold">Active</span>
@@ -124,6 +132,34 @@
             </div>
         </div>
     </div>
+    
+    <!-- Date Edit Modal -->
+<div class="modal fade" id="dateEditModal" tabindex="-1" aria-labelledby="dateEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="dateEditForm">
+        @csrf
+        @method('PUT')
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Created Date</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="review_id">
+          <input type="hidden" id="update_url">
+          <div class="mb-3">
+            <label for="created_at" class="form-label">Date</label>
+            <input type="date" name="created_at" id="created_at" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Update</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 
@@ -166,4 +202,49 @@
             });
         });
     </script>
+    <script>
+$(document).ready(function () {
+ 
+    $(document).on('click', '.open-date-modal', function () {
+        let id = $(this).data('id');
+        let date = $(this).data('date');
+        let url = $(this).data('url');
+ 
+        $('#review_id').val(id);
+        $('#created_at').val(date);
+        $('#update_url').val(url);
+ 
+        $('#dateEditModal').modal('show');
+    });
+    $('#dateEditForm').submit(function (e) {
+        e.preventDefault();
+ 
+        let url = $('#update_url').val();
+        let date = $('#created_at').val();
+        let token = $('input[name="_token"]').val();
+ 
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                _token: token,
+                _method: 'PUT',
+                created_at: date
+            },
+            success: function (res) {
+                if (res.success) {
+                    let id = $('#review_id').val();
+                    let row = $(`button[data-id="${id}"]`).closest('td');
+                    row.find('.date-text').text(res.new_date);
+                    $('#dateEditModal').modal('hide');
+                }
+            },
+            error: function () {
+                alert('Something went wrong.');
+            }
+        });
+    });
+ 
+});
+</script>
 @endsection

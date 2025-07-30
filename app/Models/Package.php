@@ -16,6 +16,7 @@ class Package extends Model
         'reviews',
         'subscriptions',
         'status',
+        'package_type',
     ];
 
     protected $casts = [

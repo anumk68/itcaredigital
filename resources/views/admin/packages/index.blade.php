@@ -47,7 +47,21 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $package->package_name }}</td>
-                            <td>₹{{ number_format($package->price, 2) }}</td>
+                            @php
+    $priceArray = explode(',', $package->price);
+    $mainPrice = isset($priceArray[0]) ? number_format($priceArray[0], 2) : '0.00';
+    $cutPrice = isset($priceArray[1]) ? number_format($priceArray[1], 2) : null;
+@endphp
+
+<td>
+    ₹{{ $mainPrice }}
+    @if ($cutPrice)
+        <span style="text-decoration: line-through; color: #888; margin-left: 5px;">
+            ₹{{ $cutPrice }}
+        </span>
+    @endif
+</td>
+
                             <td>
                                 @php
                                     $words = explode(' ', $package->short_description);

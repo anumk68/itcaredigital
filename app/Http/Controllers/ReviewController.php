@@ -16,7 +16,7 @@ class ReviewController extends Controller
         ]);
 
         Review::create([
-            'user_id'    => Auth::id(),
+            'user_id'    => Auth::guard('user')->user()->id,
             'package_id' => $request->package_id,
             'rating'     => $request->rating,
             'comment'    => $request->comment,
@@ -28,7 +28,7 @@ class ReviewController extends Controller
 
     public function reviews_list()
     {
-        $data = Review::with('package', 'user')->orderby('created_at','desc')->get();
+         $data = Review::with('package', 'user')->get();
         return view('admin.reviews.list', compact('data'));
     }
     public function reviews_delete($id)
@@ -46,5 +46,21 @@ class ReviewController extends Controller
 
         return back()->with('success', 'Status updated successfully.');
     }
+    
+    public function updateDate(Request $request, $id)
+{
+    $request->validate([
+        'created_at' => 'required|date',
+    ]);
+ 
+    $item = Review::findOrFail($id);
+    $item->created_at = $request->created_at;
+    $item->save();
+ 
+    return response()->json([
+        'success' => 'Date updated success',
+        'new_date' => \Carbon\Carbon::parse($item->created_at)->format('M d, Y'),
+    ]);
+}
 
 }

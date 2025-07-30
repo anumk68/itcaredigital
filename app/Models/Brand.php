@@ -18,6 +18,9 @@ class Brand extends Model
         'status',
         'seo_content',
         'additional_image',
+         'meta_title',
+    'meta_description',
+    'meta_keyword',
     ];
     public function services()
 {

@@ -30,10 +30,11 @@ class PackageController extends Controller
             'reviews' => 'nullable|string',
             'subscriptions' => 'nullable|string',
             'status' => 'required|boolean',
+            'package_type' => 'nullable',
         ]);
 
         $data['slug'] = Str::slug($request->package_name);
-        $data['subscriptions'] = $request->subscriptions ? explode(',', $request->subscriptions) : [];
+        $data['subscriptions'] = $request->subscriptions ? explode(',', $request->subscriptions) :   [];
 
         Package::create($data);
 
@@ -52,13 +53,14 @@ class PackageController extends Controller
 
         $data = $request->validate([
             'package_name' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'short_description' => 'required|string',
             'description' => 'nullable|string',
             'amenities' => 'nullable|string',
             'reviews' => 'nullable|string',
             'subscriptions' => 'nullable|string',
             'status' => 'required|boolean',
+             'package_type' => 'nullable',
         ]);
 
         $data['slug'] = Str::slug($request->package_name);

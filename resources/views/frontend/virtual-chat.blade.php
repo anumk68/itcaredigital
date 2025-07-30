@@ -274,7 +274,7 @@
                                                 </select>
                                                 <input style="width:36%;" type="text" pattern="\d{10}" maxlength="10" name="phone" id="phone" placeholder="Your Phone Number" class="form-control mb-1" required>
                                             </div>
-                                            
+
                                             <textarea class="form-control w-50" name="feedback" id="feedback" placeholder="Enter your feedback" required></textarea>
                                             <button class="form-control mt-3 text-box w-25 btn-primary" type="submit">Submit</button>
                                         </form>
@@ -368,7 +368,7 @@
 
     <script>
         document.getElementById('feedbackForm').addEventListener('submit', function(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     let name = document.getElementById('name').value;
     let email = document.getElementById('email').value;

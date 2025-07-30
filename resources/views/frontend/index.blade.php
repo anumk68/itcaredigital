@@ -1,7 +1,5 @@
 @extends('layouts.app')
-@section('head')
-    <meta name="robots" content="noindex, nofollow">
-@endsection
+
 @section('meta_description')
 @section('content')
 
@@ -56,7 +54,7 @@
             @foreach ($brands->chunk(5) as $brandRow)
                 <div class="row justify-content-center">
                     @foreach ($brandRow as $brand)
-                        <div class="col-lg-2 col-md-2 col-sm-4 mb-3">
+                        <div class="col-lg-2 col-md-3 col-sm-4 mb-3">
                             <div class="brand-card">
                                 <a href="{{ route('printer', ['brand_slug' => strtolower($brand->slug)]) }}">
                                     @if ($brand->icon_image)
@@ -76,17 +74,17 @@
         </div>
     </section>
 
-    <section class="why_choose_us">
+    <section class="why_choose_us pb-0">
         <div class="container">
             <div class="row align-items-center">
 
                 <!-- Left Column (Video) -->
                 <!-- <div class="video-container">
-                                <video autoplay muted loop>
-                                     <source src="{{ asset('public/video/final_after_changes.mp4') }}" type="video/mp4">
-                                  Why Choose All Printer Setup to Fix Your Printer Issues?
-                                </video>
-                            </div> -->
+                                    <video autoplay muted loop>
+                                         <source src="{{ asset('public/video/final_after_changes.mp4') }}" type="video/mp4">
+                                      Why Choose All Printer Setup to Fix Your Printer Issues?
+                                    </video>
+                                </div> -->
                 <div class="col-md-6 mx-auto text-center">
                     <div class="video-thumbnail" onclick="openPopup()">
                         <img src="{{ asset('public/images/video_background_img.jpg') }}" alt="printer_logo">
@@ -151,88 +149,110 @@
                 <!-- Left Column (Video) -->
                 <div class="col-md-6 mb-3">
                     <div class="img_about">
-                        <img src="{{ asset('public/images/About_Printer_Setup.webp') }}" alt="">
+                        <img src="{{ asset('public/images/12345image.jpg') }}" alt="">
                     </div>
                 </div>
             </div>
 
         </div>
     </section>
-
-
-    <section class="member_pricing">
-        <div class="container">
-
-
-            <div class="row align-items-center">
+<main class="pricing-section  ">
+    <div class="container">
+                    <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="sec-title-two text-center">
-                        <h2 class="title">Flexible Plans for Reliable Printer Support </h2>
+                        <h2 class="title mb-4">Flexible Plans for Reliable Printer Support </h2>
                     </div>
-
                 </div>
-
             </div>
-              <div class="row justify-content-center">
-                @foreach ($packages as $package)
-                    @php
-                        $packageReviews = $package->review ?? collect();
-                        $average = $packageReviews->avg('rating');
+        <!-- One Time Fix -->
+        <section class="plan-section">
+            <div class="card-container">
+                @foreach ($packages->take(4) as $package)
+                @php
+                $packageReviews = $package->review ?? collect();
+                $average = $packageReviews->avg('rating');
 
-                        $rounded = round($average * 2) / 2;
-                        $count = $packageReviews->count();
-                          $subscriberCount = $package->orders->count();
+                $rounded = round($average * 2) / 2;
+                $count = $packageReviews->count();
+                $subscriberCount = $package->orders->count();
+                @endphp
+
+                <div class="card">
+                    @if ($package->package_type == 'recommended')
+                    <span class="badge recommended">RECOMMENDED</span>
+                    @elseif($package->package_type == 'limited')
+                             <span class="badge limited">LIMITED TIME OFFER</span>
+                    @endif
+                    <h3>{{ $package->package_name }}</h3>
+
+                    @php
+                    $priceArray = explode(',', $package->price);
+                    $mainPrice = isset($priceArray[0]) ? number_format($priceArray[0], 2) : '0.00';
+                    $cutPrice = isset($priceArray[1]) ? number_format($priceArray[1], 2) : null;
                     @endphp
 
-                    <div class="col-md-3 mb-3">
-                        <div class="plan">
-                            <h3>{{ $package->package_name }}</h3>
-                            <div class="price">${{ number_format($package->price, 2) }}</div>
-                            <div class="desc">{{ $package->short_description }}</div>
+                    <div class="price-box">
+                        <span class="discounted-price">${{ $mainPrice }}</span>
 
-                            <button class="select-btn">
-                                <a href="{{ route('package.detail', $package->slug) }}">Select Membership</a>
-                            </button>
+                        @if ($cutPrice)
+                        <span class="original-price">${{ $cutPrice }}</span>
+                        @endif
+                    </div>
 
-                            <div class="rating-review-box">
-                                <div class="stars">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($rounded >= $i)
-                                            <i class="fas fa-star"></i>
-                                        @elseif ($rounded >= $i - 0.5)
-                                            <i class="fas fa-star-half-alt"></i>
-                                        @else
-                                            <i class="far fa-star"></i>
-                                        @endif
-                                    @endfor
-                                    <div class="reviews">{{ $count }}+ Reviews</div>
-                                </div>
-                                <div class="reviewws">{{$subscriberCount}}+ already Subscribed</div>
-                            </div>
 
-                            <span class="toggle-link" onclick="toggleList(this)">Show More Features</span>
+                    <p>{{ $package->short_description }}</p>
+                    <a href="{{ route('package.detail', $package->slug) }}" class="select-btn">Select Membership</a>
 
-                            <ul class="features">
+                    <div class="rating-review-box">
+                        <div class="stars">
+                            @for ($i = 1; $i <= 5; $i++) @if ($rounded>= $i)
+                                <i class="fas fa-star"></i>
+                                @elseif ($rounded >= $i - 0.5)
+                                <i class="fas fa-star-half-alt"></i>
+                                @else
+                                <i class="far fa-star"></i>
+                                @endif
+                                @endfor
+
+                        </div>
+                        <div class="reviews">{{ $count }}+ Reviews</div>
+                        @php
+                        $displaySubscriberCount = ($subscriberCount ?? 0) > 0 ? $subscriberCount : rand(100, 200);
+                        @endphp
+                        <div class="reviewws">{{ $displaySubscriberCount }}+ already Subscribed</div>
+                    </div>
+
+                    <div class="features-toggle">
+                        <div class="toggle-btn-wrapper">
+                            <button class="toggle-btn">Show More Features ▼</button>
+                        </div>
+
+                        <div class="feature-wrapper">
+                            <ul class="feature-list">
                                 @php
-                                    $amenities = explode(',', $package->amenities);
+                                $amenities = explode(',', $package->amenities);
                                 @endphp
                                 @foreach ($amenities as $amenity)
-                                    <li>✓ {{ trim($amenity) }}</li>
+                                <li>✓ {{ trim($amenity) }}</li>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
+                </div>
                 @endforeach
-
-
- <div class="btn_member_btn">
-                        <a href="{{ route('members') }}" class="btn">See More</a>
-                    </div>
             </div>
+             
+        </section>
+  <div class="btn_member_btn">
+                    <a href="{{ route('members') }}" class="btn">See More</a>
+                </div>
+    </div>
+</main>
 
-        </div>
 
-    </section>
+               
+           
     <section class="latest-blog-area py_8">
         <div class="container">
             <div class="row align-items-center">
@@ -245,7 +265,7 @@
                 <div class="col-md-3">
                     <div class="button pull-right">
                         <!-- <a href="{{ route('blogs') }}">Read More News<i class="fa fa-caret-right"
-                                        aria-hidden="true"></i></a> -->
+                                            aria-hidden="true"></i></a> -->
                         <a href="{{ route('blogs') }}" class="btn">Read More News</i></a>
                     </div>
                 </div>
@@ -271,8 +291,13 @@
                                     <li><i class="fa fa-clock-o" aria-hidden="true"></i><a
                                             href="#">{{ $blog->created_at->format('M d, Y') }}</a></li>
                                 </ul>
+                                
+                                
                                 <a href="{{ route('blog.blog_details', $blog->slug) }}">
-                                    <h3 class="blog-title">{{ $blog->title }}</h3>
+                                    <h3 class="blog-title">
+    {{ \Illuminate\Support\Str::words($blog->title, 6, '...') }}
+</h3>
+
                                 </a>
                                 <p>{{ substr($blog->meta_description, 0, 140) }}...</p>
                                 <a class="btn" href="{{ route('blog.blog_details', $blog->slug) }}">
@@ -440,18 +465,17 @@
             </div>
         </div>
     </section>
-    @if ($orders->isNotEmpty())
-        @foreach ($orders as $index => $order)
-            <div class="notify-box popupBox" id="popupBox-{{ $index }}" style="display: none;">
-                <div class="printer-decor top-right"></div>
-                <div class="printer-decor bottom-left"></div>
-
-                <div class="notify-text">
+  @if ($orders->isNotEmpty())
+    @foreach ($orders as $index => $order)
+        <div class="notify-box popupBox" id="popupBox-{{ $index }}" style="display: none;">
+            <div class="printer-decor top-right"></div>
+            <div class="printer-decor bottom-left"></div>
+            <div class="notify-text">
                 <div class="notify-img">
                     <img src="{{ asset('public/images/icons8-happy.gif') }}" alt="">
                 </div>
-             <div class="rating_pricing">
-                       <span class="name">🎉 {{ ucfirst($order->user->name) }} just subscribed!</span>
+                <div class="rating_pricing">
+                    <span class="name">🎉 {{ ucfirst($order->user->name) }} just subscribed!</span>
 
                     @if ($order->amount)
                         <span class="plan mb-1">💰 ${{ $order->amount }} Plan</span>
@@ -464,26 +488,54 @@
                     @if ($order->package->package_name)
                         <span class="plan mb-1">📦 {{ $order->package->package_name }}</span>
                     @endif
-             </div>
-
                 </div>
             </div>
-        @endforeach
-    @else
-        {{-- Fallback static box --}}
-        <div class="notify-box popupBox" id="popupBox-0">
-            <div class="printer-decor top-right"></div>
-            <div class="printer-decor bottom-left"></div>
+        </div>
+    @endforeach
+@else
+    {{-- Fallback static random-like data --}}
+    @php
+        $fakeNames = ['jhon', 'Daniel', 'John', 'Sana', 'Emily',  'Suzan'];
+        $fakePackages = ['Starter', 'Pro', 'Enterprise', 'Business', 'Premium'];
+        $fakeAmounts = [279, 349, 189, 219, 149];
+        $fakeTimes = ['2 minutes ago', '10 minutes ago', '1 hour ago', 'Just now', '30 minutes ago'];
+        $fakeReviews = [
+            'Awesome support!',
+            'Highly recommended!',
+            'Very satisfied with the service.',
+            'Worth every penny!',
+            'Super fast setup!'
+        ];
+
+        for ($i = 0; $i < 3; $i++) {
+            $name = $fakeNames[array_rand($fakeNames)];
+            $package = $fakePackages[array_rand($fakePackages)];
+            $amount = $fakeAmounts[array_rand($fakeAmounts)];
+            $time = $fakeTimes[array_rand($fakeTimes)];
+            $review = $fakeReviews[array_rand($fakeReviews)];
+    @endphp
+
+
+    <div class="notify-box popupBox" id="popupBox-{{ $i }}" style="display: none;">
+        <div class="printer-decor top-right"></div>
+        <div class="printer-decor bottom-left"></div>
+        <div class="notify-text">
             <div class="notify-img">
                 <img src="{{ asset('public/images/icons8-happy.gif') }}" alt="">
             </div>
-            <div class="notify-text">
-                <span class="name">We appreciate your subscription</span>
-                <span class="plan mb-2">$99 Plan</span>
-                <span class="plan">Richard has subscribed to the plan successfully!</span>
+            <div class="rating_pricing">
+                <span class="name">🎉 {{ $name }} just subscribed!</span>
+                <span class="plan mb-1">💰 ${{ $amount }} Plan</span>
+                <span class="plan mb-1">🕒 {{ $time }}</span>
+                <span class="plan mb-1">📦 {{ $package }}</span>
+                <span class="plan">💬 "{{ $review }}"</span>
             </div>
         </div>
-    @endif
+    </div>
+
+    @php } @endphp
+@endif
+
 
     <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">

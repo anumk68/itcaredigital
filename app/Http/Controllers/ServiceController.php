@@ -4,32 +4,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
 use App\Models\Brand;
+use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class ServiceController extends Controller {
-    public function index() {
+class ServiceController extends Controller
+{
+    public function index()
+    {
         $services = Service::with('brand')->orderBy('id', 'desc')->get();
         return view('admin.services.list', compact('services'));
     }
 
-    public function create() {
+    public function create()
+    {
         $brands = Brand::where('status', 'active')->get();
         return view('admin.services.create', compact('brands'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validated = $request->validate([
-            'service_name' => 'required|string|max:255',
-            'brand_id' => 'required|exists:brands,id',
-            'slug' => 'nullable|string|max:255',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp',
-            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp',
-            'description' => 'nullable|string',
-            'status' => 'nullable|in:active,inactive'
+            'service_name'     => 'required|string|max:255',
+            'brand_id'         => 'required|exists:brands,id',
+            'slug'             => 'nullable|string|max:255',
+            'icon'             => 'nullable|image|mimes:jpeg,png,jpg,svg,webp',
+            'banner_image'     => 'nullable|image|mimes:jpeg,png,jpg,svg,webp',
+            'description'      => 'nullable|string',
+            'meta_title'       => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+            'meta_keyword'     => 'nullable|string',
+            'status'           => 'nullable|in:active,inactive',
         ]);
 
         // Handle file uploads
@@ -42,27 +49,32 @@ class ServiceController extends Controller {
         }
 
         $validated['status'] = $validated['status'] ?? 'active';
-        $validated['slug'] = $validated['slug'] ?? Str::slug($validated['service_name']);
+        $validated['slug']   = $validated['slug'] ?? Str::slug($validated['service_name']);
 
         Service::create($validated);
 
         return redirect()->route('services.index')->with('success', 'Service created successfully.');
     }
 
-    public function edit(Service $service) {
+    public function edit(Service $service)
+    {
         $brands = Brand::where('status', 'active')->get();
         return view('admin.services.edit', compact('service', 'brands'));
     }
 
-    public function update(Request $request, Service $service) {
+    public function update(Request $request, Service $service)
+    {
         $validated = $request->validate([
             'service_name' => 'required|string|max:255',
-            'brand_id' => 'required|exists:brands,id',
-            'slug' => 'nullable|string|max:255',
-            'icon' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp',
+            'brand_id'     => 'required|exists:brands,id',
+            'slug'         => 'nullable|string|max:255',
+            'icon'         => 'nullable|image|mimes:jpeg,png,jpg,svg,webp',
             'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp',
-            'description' => 'nullable|string',
-            'status' => 'nullable|in:active,inactive'
+            'description'  => 'nullable|string',
+             'meta_title'       => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+            'meta_keyword'     => 'nullable|string',
+            'status'       => 'nullable|in:active,inactive',
         ]);
 
         if ($request->hasFile('icon')) {
@@ -79,7 +91,7 @@ class ServiceController extends Controller {
             $validated['banner_image'] = $request->file('banner_image')->store('services/banners', 'public');
         }
 
-        $validated['slug'] = $validated['slug'] ?? Str::slug($validated['service_name']);
+        $validated['slug']   = $validated['slug'] ?? Str::slug($validated['service_name']);
         $validated['status'] = $validated['status'] ?? 'active';
 
         $service->update($validated);
@@ -87,7 +99,8 @@ class ServiceController extends Controller {
         return redirect()->route('services.index')->with('success', 'Service updated successfully.');
     }
 
-    public function destroy(Service $service) {
+    public function destroy(Service $service)
+    {
         if ($service->icon) {
             Storage::disk('public')->delete($service->icon);
         }
@@ -98,4 +111,3 @@ class ServiceController extends Controller {
         return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
     }
 }
-

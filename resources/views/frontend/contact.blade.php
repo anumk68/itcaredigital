@@ -10,8 +10,8 @@
  </div>
      <div class="row align-items-center">
           <div class="col-md-6">
-                    <h3>Get Your Issues Fixed Anytime of the Day</h3>
-                    <p>No matter what time of the day it is, if you’re facing any kind of technical issue, we’re always just a call away to help you.</p>
+                    <h3>Get Expert Support – Contact Our Printer Setup Specialists Today</h3>
+                    <p>No matter what time of the day it is, if you’re facing any kind of technical printer issue, we’re always just a call away to help you.</p>
                    <div class="btn_about_us_contact">
                             <a href="{{ route('members') }}" class="btn">See Membership</a>
                         </div>

@@ -14,14 +14,18 @@
                     </div>
                     <p class="footer-widget-text">Transforming digital potential into business success through powerful
                         marketing solutions that deliver real results.</p>
-                    <!-- <div class="footer-social">
+                    <div class="footer-social">
                         <div class="footer-widget-social">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://x.com/ITCareDigital"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/itcaredigital/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.pinterest.com/itcaredigitalofficial/"><i class="fab fa-pinterest-p"></i></a>
+
+                            <!-- <a href="#"><i class="fab fa-facebook-f"></i></a>
                             <a href="#"><i class="fab fa-twitter"></i></a>
                             <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#"><i class="fab fa-pinterest-p"></i></a> -->
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -51,7 +55,6 @@
                         <li><a href="{{ route('about-us') }}">About</a></li>
                         <li><a href="{{ route('blog') }}"> Blog</a></li>
                         <li><a href="{{ route('contact') }}">Contact Us</a></li>
-
                     </ul>
                 </div>
             </div>

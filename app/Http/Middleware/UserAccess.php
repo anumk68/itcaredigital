@@ -21,7 +21,7 @@ class UserAccess
             return $next($request);
             // return $request->expectsJson() ? null : route('admin.login');
         }
-          
+
         return redirect('login')->with('error','You have not admin access');
     }
 }

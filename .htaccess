@@ -3,6 +3,9 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    AddType image/svg+xml .svg .svgz
+    AddEncoding gzip .svgz
+
     RewriteEngine On
 
     # Block access to .env and sensitive files directly
@@ -12,8 +15,6 @@
     RewriteCond %{THE_REQUEST} \s/index\.php [NC]
     RewriteRule ^index\.php(.*)$ /$1 [R=301,L]
 
-  
-
     # Prevent direct access to PHP files in storage and cache directories
     RewriteRule ^(storage|bootstrap/cache)/.*\.php$ - [F,L]
 
@@ -22,12 +23,18 @@
         Require all denied
     </FilesMatch>
 
-    # Prevent redirection of static assets (CSS, JS, images)
-    RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|webp|woff2|woff|ttf|ico|mp4)$ [NC]
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Handle other public assets
-    RewriteCond %{REQUEST_URI} ^/public/(.*)$
-    RewriteRule ^public/(.*)$ /$1 [L,R=301]
+    # Allow direct access to static assets (IMPORTANT FIX)
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule .* - [L]
+
+    # Handle other public assets - REMOVED PROBLEMATIC RULE
+    # RewriteCond %{REQUEST_URI} ^/public/(.*)$
+    # RewriteRule ^public/(.*)$ /$1 [L,R=301]
 
     # Redirect www to non-www
     RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
@@ -36,8 +43,8 @@
     # Deny access to hidden files and directories starting with a dot
     RewriteRule "(^|/)\." - [F]
 
-    # Don't rewrite requests for existing files and directories
-    RewriteCond %{REQUEST_FILENAME} !-f
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>

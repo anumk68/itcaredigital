@@ -1,5 +1,5 @@
 
-@extends('layouts.adminapp')
+@extends('admin.includes.app')
 
 @section('content')
 
@@ -87,7 +87,7 @@
 
                                     </div>
                                     <div class="file-preview box sm">
-                                            <img src="{{asset($blog->banner)}}" alt="bruce" class="w-100 border-radius-lg shadow-sm">
+                                            <img src="{{asset('public/'.$blog->banner)}}" alt="bruce" class="w- border-radius-lg shadow-sm" height="200px" width="200px">
                                     </div>
                                 </div>
                             </div>
@@ -141,8 +141,7 @@
                                     </div>
                                     <div class="file-preview box sm">
                                         @if(('header_logo') != null)
-                                            <img src="{{ asset($blog->meta_img) }}" alt="bruce" width="150px" height="150px" class="border-radius-lg shadow-sm">
-
+                                            <img src="{{ asset('public/' . $blog->meta_img) }}" alt="bruce" width="150px" height="150px" class="border-radius-lg shadow-sm">
                                         @endif
                                     </div>
                                 </div>

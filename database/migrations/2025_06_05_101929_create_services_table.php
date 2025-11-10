@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('service_name')->nullable();
-            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
+            $table->string('brand_id')->constrained('brands')->onDelete('cascade');
             $table->string('slug')->nullable();
             $table->string('icon')->nullable();
             $table->string('banner_image')->nullable();

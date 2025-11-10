@@ -14,151 +14,73 @@
         <!--navigation-->
         <ul class="metismenu" id="menu">
             <li>
-                <a href="{{ route('dashboard') }}"><i class='bx bx-radio-circle'></i>
+                <a href="{{ route('dashboard') }}"> <i class='bx bx-home'></i>
                     <div class="menu-title">Dashboard</div>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('manage.users') }}">
-                    <div class="parent-icon"><i class='bx bx-user'></i>
-                    </div>
-                    <div class="menu-title">Users</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('reviews') }}">
-                    <div class="parent-icon"><i class='bx bx-star'></i>
-                    </div>
-                    <div class="menu-title">Review</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('orders') }}">
-                    <div class="parent-icon"><i class='bx bx-package'></i>
 
-                    </div>
-                    <div class="menu-title">Orders</div>
-                </a>
-            </li>
             <li>
                 <a href="{{ route('inquiry.list') }}">
-                    <div class="parent-icon"><i class='bx bx-help-circle'></i>
+                    <div class="parent-icon"><i class='bx bx-message-dots'></i>
+
+
                     </div>
                     <div class="menu-title">Customer Inquery</div>
                 </a>
             </li>
             <li>
-                <a href="{{ route('contact-index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Contact Details</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('subscribe.index') }}">
-                    <div class="parent-icon">
-                        <i class='bx bx-envelope'></i>
-                    </div>
-                    <div class="menu-title">Subscribers</div>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('assistance-index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Assistance Details</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('support-index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Support Form Details</div>
-                </a>
-            </li>
-
-            <li class="menu-label">UI Elements</li>
-            <li>
-                <a href="{{ route('brands.index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Brands</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('services.index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Services</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('packages.index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Package</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('brand_series.index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Brand Series</div>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('faqs.index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">FAQs</div>
-                </a>
-            </li>
-            <li>
                 <a href="javascript:void(0);" class="has-arrow">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
+                    <div class="parent-icon"><i class='bx bx-news'></i>
                     </div>
                     <div class="menu-title">Blogs</div>
                 </a>
                 <ul>
                     <li>
-                        <a href="{{ route('admin.blog') }}"><i class='bx bx-radio-circle'></i>Blog List</a>
+                        <a href="{{ route('admin.blog') }}"> <i class='bx bx-file'></i>Blog List
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ route('blog.category') }}"><i class='bx bx-radio-circle'></i>Category</a>
+                        <a href="{{ route('blog.category') }}"> <i class='bx bx-category'></i>Category</a>
                     </li>
-
                 </ul>
-
             </li>
-
-            <li>
-                <a href="{{ route('vlog.index') }}">
-                    <div class="parent-icon"><i class='bx bx-cookie'></i>
-                    </div>
-                    <div class="menu-title">Vlogs</div>
-                </a>
-            </li>
-
             <li>
                 <a href="javascript:void(0);" class="has-arrow">
-                    <div class="parent-icon"><i class='bx bx-cart'></i>
-                    </div>
+                    <div class="parent-icon"><i class='bx bx-cog'></i></div>
                     <div class="menu-title">Settings</div>
                 </a>
+                <!-- <ul>
+                    <li>
+                        <a href="{{ route('metaPage') }}">
+                            <i class='bx bx-sliders'></i>Meta Setting
+                        </a>
+                    </li>
+                </ul> -->
+
                 <ul>
-                    <li> <a href="{{ route('metaPage') }}"><i class='bx bx-radio-circle'></i>Setting Page</a>
+                    <li>
+                        <a href="{{ route('meta.list') }}">
+                            <i class='bx bx-sliders'></i>Meta
+                        </a>
                     </li>
                 </ul>
+                <ul>
+                    <li>
+                        <a href="{{ route('pages.list') }}">
+                            <i class='bx bx-sliders'></i>Pages
+                        </a>
+                    </li>
+                </ul>
+
             </li>
-            <li>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <div class="parent-icon"><i class='bx bx-log-out'></i></div>
-                    <div class="menu-title">Logout</div>
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <div class="parent-icon"><i class='bx bx-log-out'></i></div>
+                <div class="menu-title">Logout</div>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
             </li>
         </ul>
         <!--end navigation-->
@@ -172,8 +94,7 @@
                 </div>
 
                 <div class="search-bar d-lg-block d-none" data-bs-toggle="modal" data-bs-target="#SearchModal">
-                    <a href="avascript:;" class="btn d-flex align-items-center"><i
-                            class="bx bx-search"></i>Search</a>
+                    <a href="avascript:;" class="btn d-flex align-items-center"><i class="bx bx-search"></i>Search</a>
                 </div>
 
                 <div class="top-menu ms-auto">
@@ -185,19 +106,17 @@
                         </li>
                         <li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:void(0);"
-                                data-bs-toggle="dropdown"><img src="public/assets/images/county/02.png"
-                                    width="22" alt="">
+                                data-bs-toggle="dropdown"><img src="public/assets/images/county/02.png" width="22"
+                                    alt="">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item d-flex align-items-center py-2"
-                                        href="javascript:void(0);">
+                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:void(0);">
                                         <img src="{{ asset('public/admin/assets/images/county/01.png') }}"
                                             width="20" alt="">
                                         <span class="ms-2">English</span></a>
                                 </li>
 
-                                <li><a class="dropdown-item d-flex align-items-center py-2"
-                                        href="javascript:void(0);">
+                                <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:void(0);">
                                         <img src="{{ asset('public/admin/assets/images/county/03.png') }}"
                                             width="20" alt="">
                                         <span class="ms-2">French</span></a>
@@ -218,8 +137,8 @@
                         </li>
 
                         <li class="nav-item dropdown dropdown-large">
-                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
-                                href="#" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"
+                                data-bs-toggle="dropdown">
                                 <i class='bx bx-bell'></i>
                             </a>
 

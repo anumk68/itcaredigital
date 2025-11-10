@@ -12,13 +12,19 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-  
+
         ->withMiddleware(function (Middleware $middleware) {
             $middleware->alias([
                 'admin' => \App\Http\Middleware\Authenticate::class,
             ]);
         })
-   
+        ->withMiddleware(function (Middleware $middleware) {
+    // $middleware->alias([
+    //     'access.control' => \App\Http\Middleware\AccessControlMiddleware::class,
+    // ]);
+})
+
+
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

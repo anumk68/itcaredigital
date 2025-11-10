@@ -1,613 +1,1101 @@
-@extends('layouts.app')
-
-@section('meta_description')
+@extends('frontend.layouts.app')
+@section('title', $title)
+@section('meta_description', $desc)
+@section('meta_keywords', $key)
 @section('content')
 
-    <section class="banner-section"
-        style="background: linear-gradient(rgb(31 191 255 / 52%), rgb(31 191 255 / 52%)),
-              url(public/images/about_bannner.png);">
 
+    <style>
+        .contact-box::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            left: -20%;
+            background-repeat: no-repeat;
+            background-position: center;
+            top: 33%;
+
+        }
+
+        .contact-area {
+            background: url("{{ asset('public/frontend/assets/images/contact-bg2.png') }}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding: 120px 0 120px;
+            position: relative;
+        }
+
+        @media (max-width: 991.98px) {
+            .contact-area {
+                background: none;
+            }
+        }
+    </style>
+
+
+    <!--==================================================-->
+    <!-- Start solutek hero Area -->
+    <!--==================================================-->
+
+
+    <div class="hero-area d-flex align-items-center">
         <div class="container">
-            <div class="row align-items-center g-5">
-                <!-- Left Content -->
+            <div class="row hero align-items-center">
                 <div class="col-lg-6">
-                    <div class="banner_content">
-                        <h1 class="display-5 fw-bold">Dealing with Printer Problems? Get Instant Support</h1>
-                        <p class="mt-3">
-                            All Printer Setup offers expert and accessible Online Printer Support Services to customers all
-                            over the USA. Whether your printer is displaying spooler errors, having connectivity issues, or
-                            just not responding, our expert support team is here to assist you. From simple driver updates
-                            to complex setup failures, we do it all—so you can stop worrying about technical issues.
-                        </p>
-                        <p>Our certified technicians offer round-the-clock printer help for all major brands, including HP,
-                            Canon, Brother, and Epson. No matter what model you own, we deliver personalized printer support
-                            services designed to diagnose and fix your device quickly and efficiently.
-                        </p>
+                    <div class="hero-contant">
+                        <h5>Welcome to IT Care Digital</h5>
+                        <h1>Best Digital Marketing Agency in the USA</h1>
 
+                        <p>As the best digital marketing & web development agency in the USA, we help businesses grow their
+                            brand with strategies that deliver real results. Our data-driven digital marketing solutions are
+                            designed to connect you with your audience and boost performance effectively.</p>
+                        <div class="solutek-btn">
+                            <a href="{{ route('contact') }}">Learn MORE
+                                <div class="solutek-hover-btn hover-bx"></div>
+                                <div class="solutek-hover-btn hover-bx2"></div>
+                                <div class="solutek-hover-btn hover-bx3"></div>
+                                <div class="solutek-hover-btn hover-bx4"></div>
+                            </a>
+                        </div>
+                     
                     </div>
                 </div>
-
-                <!-- Right Form -->
                 <div class="col-lg-6">
-
-                    <div class="form-container">
-                        @include('partials.common-form', [
-                            'brands' => $brands,
-                            'serviceSlug' => $service->slug ?? '',
-                            'prefix' => 'service1',
-                        ])
+                    <div class="hero-thumb d-none d-lg-block">
+                        <img src="{{ asset('public/frontend/assets/images/hero-thumb.png') }}"
+                            alt="digital marketing agency usa">
                     </div>
-
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="printer-brands py_8">
+    <!--==================================================-->
+    <!-- end solutek hero Area -->
+    <!--==================================================-->
+
+
+
+
+    <!--==================================================-->
+    <!-- Start solutek about Area -->
+    <!--==================================================-->
+
+    <div class="feature-area">
         <div class="container">
-            <div class="printer_brands_heaidng">
-                <h2>Select Your Printer Brand with Confidence</h2>
-                <p>Get Expert Support for All Leading Printer Brands in One Place!</p>
+            <div class="row about align-items-center">
+                <div class="feature-box">
+                    <div class="feature-sinble-single-box">
+                        <div class="feature-icon">
+                            <img src="{{ asset('public/frontend/assets/images/SEO.svg') }}"
+                                alt="affordable marketing services usa">
+                        </div>
+                        <div class="feature-content">
+                            <a href="{{ route('search-engine-optimization') }}"><h3 class="feature-title">SEO</h3></a>
+                            <p class="feature-text">Drives qualified traffic through keyword-focused optimization and proven
+                                strategies that improve ranking and visibility.</p>
+                        </div>
+
+                    </div>
+                    <div class="feature-sinble-single-box">
+                        <div class="feature-icon">
+                            <img src="{{ asset('public/frontend/assets/images/ppc.svg') }}"
+                                alt="website design and development company">
+                        </div>
+                        <div class="feature-content">
+                            <a href="{{ route('ppc-services') }}"><h3 class="feature-title">PPC</h3></a>
+                            <p class="feature-text">Delivers measurable results with data-driven ad campaigns that generate
+                                leads and maximize return on investment.</p>
+                        </div>
+                    </div>
+                    <div class="feature-sinble-single-box">
+                        <div class="feature-icon">
+                            <img src="{{ asset('public/frontend/assets/images/web development.svg') }}"
+                                alt="digital marketing agency usa">
+                        </div>
+                        <div class="feature-content">
+                            <a href="{{ route('web-development') }}"><h3 class="feature-title">Web Development</h3></a>
+                            <p class="feature-text">Creates high-performance, secure, and scalable websites built to meet
+                                business goals and user expectations.</p>
+                        </div>
+                    </div>
+                    <div class="feature-sinble-single-box">
+                        <div class="feature-icon">
+                            <img src="{{ asset('public/frontend/assets/images/web design .svg') }}"
+                                alt="website design and development company">
+                        </div>
+                        <div class="feature-content">
+                            <a href="{{ route('web-design') }}"><h3 class="feature-title">Web Design</h3></a>
+                            <p class="feature-text">Combines creativity and usability to design interfaces that engage
+                                visitors and reflect brand identity effectively.</p>
+                        </div>
+                    </div>
+                    <div class="feature-sinble-single-box">
+                        <div class="feature-icon">
+                            <img src="{{ asset('public/frontend/assets/images/social media marketing .svg') }}"
+                                alt="affordable marketing services usa">
+                        </div>
+                        <div class="feature-content">
+                            <a href="{{ route('social-media-marketing') }}"><h3 class="feature-title">Social Media Marketing</h3></a>
+                            <p class="feature-text">Builds strong audience connections with consistent content, targeted
+                                campaigns, and meaningful brand interactions.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!--==================================================-->
+    <!-- end solutek about Area -->
+    <!--==================================================-->
 
 
-            @foreach ($brands->chunk(5) as $brandRow)
-                <div class="row justify-content-center">
-                    @foreach ($brandRow as $brand)
-                        <div class="col-lg-2 col-md-3 col-sm-4 mb-3">
-                            <div class="brand-card">
-                                <a href="{{ route('printer', ['brand_slug' => strtolower($brand->slug)]) }}">
-                                    @if ($brand->icon_image)
-                                        <img src="{{ asset('storage/app/public/' . $brand->icon_image) }}"
-                                            alt="{{ $brand->brand_name }}">
-                                    @else
-                                        <img src="{{ asset('images/default_logo.png') }}" alt="No Image">
-                                    @endif
-                                </a>
+
+
+    <!--==================================================-->
+    <!-- start solutek about Area -->
+    <!--==================================================-->
+
+    <div class="about-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-lg-6">
+                    <div class="about-thumb">
+                        <img src="{{ asset('public/frontend/assets/images/about-thumb.png') }}"
+                            alt="custom seo and web design">
+                        <div class="about-shape">
+                            <img src="{{ asset('public/frontend/assets/images/about1.png') }}"
+                                alt="digital marketing agency usa">
+                        </div>
+                        <h4 class="about-title">BEST IT SOLUTION</h4>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="section-title text-left">
+                        <h5 class="section-sub-title">IT Care Digital</h5>
+                        <h2 class="section-main-title">Powerful Digital Marketing Solutions <span> Modern Businesses.</span>
+                        </h2>
+                        <!-- <h2 class="section-main-title"> </h2> -->
+                        <p class="section-title-descr">We create strategies that drive real growth — from brand awareness to
+                            lead generation and customer retention. IT Care Digital helps your business stand out with
+                            data-driven marketing, creative content, and impactful digital campaigns.</p>
+                    </div>
+
+                    <div class="solutek-btn">
+                        <a href="{{ route('about-us') }}">About Us
+                            <div class="solutek-hover-btn hover-bx"></div>
+                            <div class="solutek-hover-btn hover-bx2"></div>
+                            <div class="solutek-hover-btn hover-bx3"></div>
+                            <div class="solutek-hover-btn hover-bx4"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--==================================================-->
+    <!-- end solutek about Area -->
+    <!--==================================================-->
+
+
+
+
+
+    <!--==================================================-->
+    <!-- start solutek service Area -->
+    <!--==================================================-->
+
+    <div class="sservice-area">
+        <div class="container">
+            <div class="row align-items-center d-flex align-items-stretch">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h5 class="section-sub-title">It Care Digital COMPANY</h5>
+                        <h2 class="section-main-title">Our Services</h2>
+
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/web development .svg') }}"
+                                alt="digital marketing agency usa">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Web Development</h3>
+                            <p class="service-text">We build powerful, high-performing websites tailored to your goals —
+                                blending functionality, speed, and innovation to drive business success.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('web-development') }}"><i class="fas fa-plus"></i> READ MORE</a>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            @endforeach
-
-        </div>
-        </div>
-    </section>
-
-    <section class="why_choose_us pb-0">
-        <div class="container">
-            <div class="row align-items-center">
-
-                <!-- Left Column (Video) -->
-                <!-- <div class="video-container">
-                                    <video autoplay muted loop>
-                                         <source src="{{ asset('public/video/final_after_changes.mp4') }}" type="video/mp4">
-                                      Why Choose All Printer Setup to Fix Your Printer Issues?
-                                    </video>
-                                </div> -->
-                <div class="col-md-6 mx-auto text-center">
-                    <div class="video-thumbnail" onclick="openPopup()">
-                        <img src="{{ asset('public/images/video_background_img.jpg') }}" alt="printer_logo">
-                        <div class="play-button">&#9658;</div>
                     </div>
-
-                    <!-- Popup Section -->
-                    <div class="popup" id="videoPopup">
-                        <div class="popup-content">
-                            <span class="close-popup" onclick="closePopup()">&times;</span>
-                            <iframe id="youtubeVideo" src="" frameborder="0" allow="autoplay; encrypted-media"
-                                allowfullscreen></iframe>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/web design.svg') }}"
+                                alt="website design and development company">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Web Design</h3>
+                            <p class="service-text">Transform your online presence with creative, user-centric designs that
+                                reflect your brand and deliver seamless customer experiences.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('web-design') }}"><i class="fas fa-plus"></i> READ MORE</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Column (Content) -->
-                <div class="col-md-6 mb-3">
-                    <div class="content-box">
-                        <h2 class="section-heading"> Why Choose All Printer Setup to Fix Your Printer Issues?</h2>
-                        <p class="section-content">
-                            Trained support engineers at All Printer Setup are available 24/7 to diagnose and resolve any
-                            printer issues — whether it's a printer spooler failure, connectivity problems, or routine
-                            maintenance. We provide brand-agnostic printer support for HP, Canon, Brother, and Epson
-                            printers.
-
-                        </p>
-                        <p>Our mission is straightforward to provide quick and professional printer assistance whenever you
-                            need it. Getting expert printer service is simple with us — phone us anytime, and we'll take
-                            care of the rest.</p>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/search-engine optimization .svg') }}"
+                                alt="custom seo and web design">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Seacrh Engine Optimization</h3>
+                            <p class="service-text">Boost your visibility and attract the right audience through proven SEO
+                                techniques that deliver lasting results and higher rankings.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('search-engine-optimization') }}"><i class="fas fa-plus"></i> READ
+                                    MORE</a>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
-
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/ppc management .svg') }}"
+                                alt="affordable marketing services usa">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">PPC Management</h3>
+                            <p class="service-text">Accelerate your growth with strategic PPC campaigns that turn clicks
+                                into customers and maximize every advertising dollar.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('ppc-services') }}"><i class="fas fa-plus"></i> READ MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/social-marketing.svg') }}"
+                                alt="digital marketing agency usa">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Social Media Marketing</h3>
+                            <p class="service-text">Create meaningful connections with your audience through engaging
+                                social media strategies that build loyalty and drive conversions.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('social-media-marketing') }}"><i class="fas fa-plus"></i> READ MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/digital marketing .svg') }}"
+                                alt="website design and development company">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Digital Content Marketing</h3>
+                            <p class="service-text">Deliver compelling stories that inspire action. Our content marketing
+                                approach blends creativity and strategy to grow your brand voice.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('digital-content-marketing') }}"><i class="fas fa-plus"></i> READ
+                                    MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/local seo 3.png') }}"
+                                alt="custom seo and web design">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Local Seo</h3>
+                            <p class="service-text">Reach nearby customers at the right moment. Our local SEO solutions put
+                                your business on the map — literally and digitally.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('local-seo') }}"><i class="fas fa-plus"></i> READ MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 mb-3 d-flex">
+                    <div class="service-single-box">
+                        <div class="service-icon">
+                            <img src="{{ asset('public/frontend/assets/images/e commerce seo .svg') }}"
+                                alt="affordable marketing services usa">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Ecommerce Seo</h3>
+                            <p class="service-text">Drive consistent sales and visibility for your online store with
+                                targeted ecommerce SEO strategies that convert traffic into revenue.</p>
+                            <div class="service-btn">
+                                <a href="{{ route('ecommerce-seo') }}"><i class="fas fa-plus"></i> READ MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="service-shape bounce-animate3">
+                <img src="{{ asset('public/frontend/assets/images/service5.png') }}"
+                    alt="website design and development company">
+            </div>
+            <div class="service-shape2">
+                <img src="{{ asset('public/frontend/assets/images/service7.png') }}" alt="digital marketing agency usa">
+            </div>
+            <div class="service-shape3 bounce-animate4">
+                <img src="{{ asset('public/frontend/assets/images/service8.png') }}" alt="custom seo and web design">
             </div>
         </div>
-    </section>
-
-    <section class="why_choose_us py_8">
-        <div class="container">
-            <div class="row align-items-center">
-
-                <!-- Right Column (Content) -->
-                <div class="col-md-6 mb-3">
-                    <div class="content-box">
-                        <h2 class="section-heading">Who We Are</h2>
-                        <p class="section-content">
-                            Professionals at All Printer Setup are trained to deliver trusted printer support for all major
-                            brands, including HP, Canon, Brother, and Epson. Whether it's setup help, printer connectivity
-                            issues, or routine printer maintenance services, we're here 24/7 to get your device working
-                            again.
-                        </p>
-                        <p>Our experts offer easy-to-follow printer assistance that simplifies fixing problems — from
-                            spooler issues to complete device restoration. Is quick Printer repair needed? Contact us
-                            anytime. We are always prepared to help.</p>
-                        <div class="btn_about_us">
-                            <a href="{{ route('about') }}" class="btn">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Left Column (Video) -->
-                <div class="col-md-6 mb-3">
-                    <div class="img_about">
-                        <img src="{{ asset('public/images/12345image.jpg') }}" alt="">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-<main class="pricing-section  ">
-    <div class="container">
-                    <div class="row align-items-center">
-                <div class="col-md-12">
-                    <div class="sec-title-two text-center">
-                        <h2 class="title mb-4">Flexible Plans for Reliable Printer Support </h2>
-                    </div>
-                </div>
-            </div>
-        <!-- One Time Fix -->
-        <section class="plan-section">
-            <div class="card-container">
-                @foreach ($packages->take(4) as $package)
-                @php
-                $packageReviews = $package->review ?? collect();
-                $average = $packageReviews->avg('rating');
-
-                $rounded = round($average * 2) / 2;
-                $count = $packageReviews->count();
-                $subscriberCount = $package->orders->count();
-                @endphp
-
-                <div class="card">
-                    @if ($package->package_type == 'recommended')
-                    <span class="badge recommended">RECOMMENDED</span>
-                    @elseif($package->package_type == 'limited')
-                             <span class="badge limited">LIMITED TIME OFFER</span>
-                    @endif
-                    <h3>{{ $package->package_name }}</h3>
-
-                    @php
-                    $priceArray = explode(',', $package->price);
-                    $mainPrice = isset($priceArray[0]) ? number_format($priceArray[0], 2) : '0.00';
-                    $cutPrice = isset($priceArray[1]) ? number_format($priceArray[1], 2) : null;
-                    @endphp
-
-                    <div class="price-box">
-                        <span class="discounted-price">${{ $mainPrice }}</span>
-
-                        @if ($cutPrice)
-                        <span class="original-price">${{ $cutPrice }}</span>
-                        @endif
-                    </div>
-
-
-                    <p>{{ $package->short_description }}</p>
-                    <a href="{{ route('package.detail', $package->slug) }}" class="select-btn">Select Membership</a>
-
-                    <div class="rating-review-box">
-                        <div class="stars">
-                            @for ($i = 1; $i <= 5; $i++) @if ($rounded>= $i)
-                                <i class="fas fa-star"></i>
-                                @elseif ($rounded >= $i - 0.5)
-                                <i class="fas fa-star-half-alt"></i>
-                                @else
-                                <i class="far fa-star"></i>
-                                @endif
-                                @endfor
-
-                        </div>
-                        <div class="reviews">{{ $count }}+ Reviews</div>
-                        @php
-                        $displaySubscriberCount = ($subscriberCount ?? 0) > 0 ? $subscriberCount : rand(100, 200);
-                        @endphp
-                        <div class="reviewws">{{ $displaySubscriberCount }}+ already Subscribed</div>
-                    </div>
-
-                    <div class="features-toggle">
-                        <div class="toggle-btn-wrapper">
-                            <button class="toggle-btn">Show More Features ▼</button>
-                        </div>
-
-                        <div class="feature-wrapper">
-                            <ul class="feature-list">
-                                @php
-                                $amenities = explode(',', $package->amenities);
-                                @endphp
-                                @foreach ($amenities as $amenity)
-                                <li>✓ {{ trim($amenity) }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-             
-        </section>
-  <div class="btn_member_btn">
-                    <a href="{{ route('members') }}" class="btn">See More</a>
-                </div>
     </div>
-</main>
+
+    <!--==================================================-->
+    <!-- end solutek service Area -->
+    <!--==================================================-->
 
 
-               
-           
-    <section class="latest-blog-area py_8">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-9">
-                    <div class="sec-title-two pull-left">
-                        <h2>All Printer Setup - Latest Blogs Update</h2>
-                    </div>
 
-                </div>
-                <div class="col-md-3">
-                    <div class="button pull-right">
-                        <!-- <a href="{{ route('blogs') }}">Read More News<i class="fa fa-caret-right"
-                                            aria-hidden="true"></i></a> -->
-                        <a href="{{ route('blogs') }}" class="btn">Read More News</i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="owl-carousel owl-theme" id="owl_1">
-                @foreach ($blogs as $blog)
-                    <div class="item">
-                        <div class="single-latest-blog11">
-                            <div class="img-holder">
-                                <img class="lazyload" src="{{ asset('public/' . $blog->banner) }}"
-                                    alt="{{ $blog->banner_alt }}">
-                                <div class="overlay-box">
-                                    <div class="box">
-                                        <div class="content">
-                                            <a href="{{ route('blog.blog_details', $blog->slug) }}"></a>
+
+
+    <!--==================================================-->
+    <!-- start solutek project Area -->
+    <!--==================================================-->
+
+    <!-- <div class="project-area">
+                        <div class="container-fluid">
+                            <div class="row project align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="section-title text-left">
+                                        <h5 class="section-sub-title">It Care Digital Services</h5>
+                                        <h2 class="section-main-title">Explore Our Recent <span>Services.</span></h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="project-right">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row carousel">
+                                <div class="project_list owl-carousel">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/Professional-SEO-Services-1536x1024.jpg') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">Search Engine Optimization</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/Online-Presence-With-Fast-Gens-Top-PPC-Services-768x512.jpg') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">Pay Per Click</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/istockphoto-640174226-170667a-1.jpg') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">Local Seo</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/e-commerce-seo-768x522.jpg') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">E-commerce Seo</a>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/social-media-marketing-article-cover-768x502.webp') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">Social Media Marketing</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/digital-marketing-2.jpg.optimal-768x521.jpg') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">Content Marketing Agency</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/medium_shot_woman_working_laptop_23_2150323510_0c305232e9-768x512.png') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">Web Development</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="project-single-box">
+                                            <div class="project-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/istockphoto-1455953950-612x612-1.jpg') }}" alt="project1">
+                                            </div>
+                                            <div class="project-content">
+                                                <h3 class="project-title"><a href="#">Web Design</a></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+    <!--==================================================-->
+    <!-- end solutek project Area -->
+    <!--==================================================-->
+
+
+
+    <!--==================================================-->
+    <!-- start solutek-brand Area -->
+    <!--==================================================-->
+
+
+    <!-- <div class="brand-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="brand_list owl-carousel">
+                                    <div class="col-lg-12">
+                                        <div class="brand-box">
+                                            <div class="brand-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/brand-img.png') }}" alt="brand img">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="brand-box">
+                                            <div class="brand-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/brand-img1.png') }}" alt="brand img">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="brand-box">
+                                            <div class="brand-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/brand-img2.png') }}" alt="brand img">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="brand-box">
+                                            <div class="brand-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/brand-img3.png') }}" alt="brand img">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="brand-box">
+                                            <div class="brand-thumb">
+                                                <img src="{{ asset('public/frontend/assets/images/brand-img4.png') }}" alt="brand img">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-holder">
-                                <ul class="meta-info">
-                                    <li><a href="#">{{ $blog->author }}</a></li>
-                                    <li><i class="fa fa-clock-o" aria-hidden="true"></i><a
-                                            href="#">{{ $blog->created_at->format('M d, Y') }}</a></li>
-                                </ul>
-                                
-                                
-                                <a href="{{ route('blog.blog_details', $blog->slug) }}">
-                                    <h3 class="blog-title">
-    {{ \Illuminate\Support\Str::words($blog->title, 6, '...') }}
-</h3>
+                        </div>
+                    </div> -->
 
-                                </a>
-                                <p>{{ substr($blog->meta_description, 0, 140) }}...</p>
-                                <a class="btn" href="{{ route('blog.blog_details', $blog->slug) }}">
-                                    Read More
-                                </a>
+
+    <!--==================================================-->
+    <!-- end solutek-brand Area -->
+    <!--==================================================-->
+
+
+
+
+
+
+    <!--==================================================-->
+    <!-- start solutek-pricing Area -->
+    <!--==================================================-->
+
+    <div class="working-proces-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h6 class="section-sub-title">OUR PROCESS</h6>
+                        <h2 class="section-main-title2">How IT Care Digital Works in 3 Simple Steps</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="working-process-box before-transprent after-transprent">
+                        <div class="process-thumb">
+                            <img src="{{ asset('public/frontend/assets/images/home-3/process-1.png') }}"
+                                alt="affordable marketing services usa">
+                            <div class="process-number">
+                                <span>01</span>
+                            </div>
+                        </div>
+                        <div class="process-content">
+                            <h4>PLAN AND RESEARCH</h4>
+                            <p>We begin by understanding your business goals, target audience, and competitors. Our team
+                                conducts in-depth market research to craft a data-driven digital strategy tailored for
+                                success.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="working-process-box after-transprent">
+                        <div class="process-thumb">
+                            <img src="{{ asset('public/frontend/assets/images/home-3/process-2.png') }}"
+                                alt="custom seo and web design">
+                            <div class="process-number">
+                                <span>02</span>
+                            </div>
+                        </div>
+                        <div class="process-content">
+                            <h4>Design & Strategy </h4>
+                            <p>Next, we bring your ideas to life with creative designs and strategic planning. From website
+                                layouts to marketing campaigns, every element is built to engage and convert.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="working-process-box before-transprent">
+                        <div class="process-thumb">
+                            <img src="{{ asset('public/frontend/assets/images/home-3/process-3.png') }}"
+                                alt="digital marketing agency usa">
+                            <div class="process-number">
+                                <span>03</span>
+                            </div>
+                        </div>
+                        <div class="process-content">
+                            <h4>Execute & Optimize</h4>
+                            <p>We launch your campaigns and continuously monitor performance. Through smart optimization and
+                                analytics, we ensure your digital presence keeps growing and delivering measurable results.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--==================================================-->
+    <!-- end solutek-pricing Area -->
+    <!--==================================================-->
+
+
+
+
+
+    <!--==================================================-->
+    <!-- start solutek-faq Area -->
+    <!--==================================================-->
+
+
+    <div class="faq-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="section-title text-left">
+                        <h5 class="section-sub-title">It Care Digital COMPANY</h5>
+                        <h2 class="section-main-title">Frequently Asked Questions </h2>
+                        <h2 class="section-main-title">About IT <span>Care Digital Services.</span></h2>
+                    </div>
+                    <div class="faq-thumb">
+                        <img src="{{ asset('public/frontend/assets/images/faq1.png') }}"
+                            alt="digital marketing agency usa">
+                    </div>
+                </div>
+                <!-- //extra schema 10nov,25 -->
+                 <script type="application/ld+json">
+                 {{ $extra }}
+                 </script>
+                 <!-- extra schema 10nov,25 ends -->
+
+                <!-- //faq schema 10nov,25 -->
+                <script type="application/ld+json">
+                    {{ $faq }}
+                </script>
+                 <!-- faq schema 10nov,25 ends -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="tab_container">
+                        <div class="feq-content">
+                            <h3 class="faq-title">A Comprehensive <span>Guide.</span></h3>
+                            <p class="faq-description">Alternative innovation network environmental whiteboard pursue
+                                for premier
+                                methods empowerment go forward opportunities</p>
+                        </div>
+                        <div id="tab1" class="tab_content">
+                            <ul class="accordion">
+                                <li>
+                                    <a class=""><span>What services can I get from IT Care Digital?</span></a>
+                                    <p style="display: none;">IT Care Digital offers services like SEO, PPC advertising,
+                                        web development, web design, social media marketing, digital content marketing,
+                                        local SEO, and ecommerce SEO to help your business grow online.</p>
+                                </li>
+                                <li>
+                                    <a><span>How can IT Care Digital improve my website’s visibility?</span></a>
+                                    <p>Through SEO, IT Care Digital optimizes your website to rank higher in search engines.
+                                        This brings the right audience to your site and increases traffic, leads, and sales.
+                                    </p>
+                                </li>
+                                <li>
+                                    <a><span>Can IT Care Digital help my business reach local customers?</span></a>
+                                    <p> Yes! With Local SEO strategies, IT Care Digital ensures your business appears in
+                                        local searches so nearby customers can find you easily, both online and on maps.</p>
+                                </li>
+                                <li>
+                                    <a><span>How does IT Care Digital create effective marketing <br> campaigns?</span></a>
+                                    <p>We follow a simple 3-step process:
+                                        Plan & Research – Understand your business, audience, and competitors.
+                                        Design & Strategy – Build creative campaigns and website designs.
+                                        Execute & Optimize – Launch campaigns and improve results using analytics.
+                                    </p>
+                                </li>
+                                <li>
+                                    <a><span>Why should I choose IT Care Digital for digital marketing?</span></a>
+                                    <p> We focus on strategies that deliver real results. By combining creativity,
+                                        data-driven insights, and continuous optimization, IT Care Digital helps your
+                                        business attract the right audience, generate leads, and grow effectively.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-shape">
+                <img src="{{ asset('public/frontend/assets/images/faq2.png') }}" alt="custom seo and web design">
+            </div>
+            <div class="faq-shape2">
+                <img src="{{ asset('public/frontend/assets/images/faq3.png') }}" alt="affordable marketing services usa">
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--==================================================-->
+    <!-- end solutek-faq Area -->
+    <!--==================================================-->
+
+
+
+
+
+
+    <!--==================================================-->
+    <!-- Start solutek testimonial Area -->
+    <!--==================================================-->
+
+    <div class="testimonial-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h5 class="section-sub-title">TESTIMONIALS</h5>
+                        <h2 class="section-main-title">What Our Customer <span>Says</span></h2>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="testi_list owl-carousel">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="testi-box">
+                                <div class="testi-single-box">
+                                    <div class="testi-icon">
+                                        <img src="{{ asset('public/frontend/assets/images/testi1.png') }}"
+                                            alt="digital marketing agency usa">
+                                    </div>
+                                    <div class="testi-content">
+                                        <p class="testi-text">"IT Care Digital completely transformed our online presence.
+                                            Their SEO and PPC strategies brought in high-quality traffic, and their team was
+                                            always proactive in optimizing campaigns. Our website performance has improved
+                                            dramatically, and we’re seeing real growth in leads and conversions."</p>
+                                        <ul class="testi-rating">
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                        </ul>
+                                        <h3 class="testi-title">Lisa Hemisworth<span>– CEO, TechWave Solutions Online</span></h3>
+                                    </div>
+                                </div>
+                                <div class="testi-author">
+                                    <img src="{{ asset('public/frontend/assets/images/testi4.png') }}"
+                                        alt="affordable marketing services usa">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="testi-box">
+                                <div class="testi-single-box">
+                                    <div class="testi-icon">
+                                        <img src="{{ asset('public/frontend/assets/images/testi1.png') }}"
+                                            alt="custom seo and web design">
+                                    </div>
+                                    <div class="testi-content">
+                                        <p class="testi-text"> "From web design to social media marketing, IT Care Digital
+                                            covers it all. Their team is creative, professional, and highly responsive. Our
+                                            brand now looks modern and engaging online, and our customers are noticing the
+                                            difference. Highly recommended for any business wanting to grow digitally."</p>
+                                        <ul class="testi-rating">
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                        </ul>
+                                        <h3 class="testi-title"> David Lee <span>– Marketing Manager, BrightVision
+                                                Co.</span></h3>
+                                    </div>
+                                </div>
+                                <div class="testi-author">
+                                    <img src="{{ asset('public/frontend/assets/images/testi5.png') }}"
+                                        alt="affordable marketing services usa">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="testi-box">
+                                <div class="testi-single-box">
+                                    <div class="testi-icon">
+                                        <img src="{{ asset('public/frontend/assets/images/testi1.png') }}"
+                                            alt="website design and development company">
+                                    </div>
+                                    <div class="testi-content">
+                                        <p class="testi-text"> "Their approach is truly data-driven and results-oriented.
+                                            IT Care Digital not only built us a high-performing website but also helped our
+                                            brand gain visibility with SEO and targeted content marketing. Their process of
+                                            planning, execution, and optimization is seamless and effective."</p>
+                                        <ul class="testi-rating">
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                        </ul>
+                                        <h3 class="testi-title">Sarah Thompson <span>– Founder, NextGen Startups</span></h3>
+                                    </div>
+                                </div>
+                                <div class="testi-author">
+                                    <img src="{{ asset('public/frontend/assets/images/testi6.png') }}"
+                                        alt="digital marketing agency usa">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="testi-box">
+                                <div class="testi-single-box">
+                                    <div class="testi-icon">
+                                        <img src="{{ asset('public/frontend/assets/images/testi1.png') }}"
+                                            alt="custom seo and web design">
+                                    </div>
+                                    <div class="testi-content">
+                                        <p class="testi-text">"Working with IT Care Digital has been a game-changer. They
+                                            designed a website that perfectly reflects our brand identity and implemented
+                                            digital marketing campaigns that deliver measurable results. Their team’s
+                                            expertise in PPC and social media marketing is unmatched."</p>
+                                        <ul class="testi-rating">
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                        </ul>
+                                        <h3 class="testi-title">Emily Rogers <span>– Head of Operations, Elite
+                                                Enterprises</span></h3>
+                                    </div>
+                                </div>
+                                <div class="testi-author">
+                                    <img src="{{ asset('public/frontend/assets/images/80.png') }}"
+                                        alt="affordable marketing services usa">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="testi-box">
+                                <div class="testi-single-box">
+                                    <div class="testi-icon">
+                                        <img src="{{ asset('public/frontend/assets/images/testi1.png') }}"
+                                            alt="website design and development company">
+                                    </div>
+                                    <div class="testi-content">
+                                        <p class="testi-text">"IT Care Digital makes digital marketing simple and
+                                            effective. Their local SEO and ecommerce SEO strategies helped us reach the
+                                            right audience at the right time, boosting sales and online engagement. Their
+                                            professional, step-by-step process ensures everything runs smoothly and delivers
+                                            results."</p>
+                                        <ul class="testi-rating">
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                            <li><i class="bi bi-star-fill"></i></li>
+                                        </ul>
+                                        <h3 class="testi-title">Michael Scott Lee <span>– Owner, LocalMart Online</span></h3>
+                                    </div>
+                                </div>
+                                <div class="testi-author" style = "border-radius: 50%">
+                                    <img src="{{ asset('public/frontend/assets/images/80 (1).png') }}"
+                                        alt="website design and development company">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--==================================================-->
+    <!-- end solutek testimonial Area -->
+    <!--==================================================-->
+
+
+
+
+
+    <!--==================================================-->
+    <!-- Start solutek contact Area -->
+    <!--==================================================-->
+
+
+    <div class="contact-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-7 col-sm-12">
+                    <div class="section-title text-left">
+                        <h5 class="section-sub-title">CONTACT US</h5>
+                        <h2 class="section-main-title">Make an Online Appointment Booking</h2>
+                        <h2 class="section-main-title">For Business Planning.</h2>
+                    </div>
+                    <div class="contact_from_box">
+                        @include('frontend.common-form.commonForm')
+                        <div id="status" class="error"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-5 col-sm-12 ">
+                    <div class="contact-box"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--==================================================-->
+    <!-- end solutek contact Area -->
+    <!--==================================================-->
+
+
+
+
+
+
+    <!--==================================================-->
+    <!-- Start solutek blog Area -->
+    <!--==================================================-->
+
+    <div class="blog-area style-two">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <h5 class="section-sub-title">LATEST NEWS & BLOG</h5>
+                        <h2 class="section-main-title">Your Source for Every Update</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($blogs as $blog)
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-blog-box">
+                            <div class="single-blog-thumb">
+                                <img src="{{ asset('public/' . $blog->banner) }}" class="img-fluid"
+                                    alt="digital marketing agency usa">
+                                <div class="blog-meta-top">
+                                    <a href="{{ route('blog') }}">UI/UX DESIGNER</a>
+                                </div>
+                            </div>
+                            <div class="blog-box-content">
+                                <div class="meta-blog">
+                                    <a href="{{ route('blog') }}"><span><i class="far fa-user"></i>HOSSAIN
+                                            ASIF</span></a>
+                                    <p><span><img
+                                                src="{{ asset('public/frontend/assets/images/home-two/mesage-icon.png') }}"
+                                                alt="custom seo and web design"></span>COMMENTS</p>
+                                </div>
+                                <h3><a href="{{ route('blog') }}">{{ $blog->title }}
+                                    </a></h3>
+
+                                <p><a href="{{ route('blog') }}">{{ $blog->short_description }}
+                                    </a></p>
+                                <div class="blog-button">
+                                    <a class="btn-2" href="{{ route('blog') }}">read post</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-            </div>
-        </div>
-    </section>
-
-
-    <section class="testimonials py_8">
-        <div class="container">
-            <h2 class="title">What Our Clients Say</h2>
-            <p class="subtitle">Real Experiences, Real Satisfaction — Hear Directly from Our Happy Customers!</p>
-
-            <div class="owl-carousel testimonial-slider">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-box">
-                    <img src="{{ asset('public/images/testimonial_1.jpg') }}" alt="John Davidson" class="profile">
-                    <h3> Sarah M., Chicago, IL</h3>
-                    <div class="stars">★★★★★</div>
-                    <p>“I had constant printer spooler problems with my HP printer, and All Printer Setup sorted it out
-                        instantly. Their support staff was extremely friendly and online late at night when I desperately
-                        needed assistance.last line - I highly recommend All Printer Setup.
-                    </p>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="testimonial-box">
-                    <img src="{{ asset('public/images/testimonial_2.jpg') }}" alt="Robert McCauley" class="profile">
-                    <h3>Daniel R., Dallas, TX</h3>
-                    <div class="stars">★★★★★</div>
-                    <p>“My Canon printer repeatedly disconnects from Wi-Fi. I rang All Printer Setup and received immediate
-                        assistance. They guided me through the repair step by step — top-notch printer connectivity service
-                        and fantastic service in general.”</p>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="testimonial-box">
-                    <img src="{{ asset('public/images/testimonial_3.jpg') }}" alt="Elizabeth" class="profile">
-                    <h3>Melissa T., San Diego, CA</h3>
-                    <div class="stars">★★★★★</div>
-                    <p>“Our office Epson printer needed regular maintenance, and these guys made it hassle-free. Their
-                        printer maintenance service is smooth, fast, and affordable. We'll keep using All Printer Setup for
-                        all our printer support services.”</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="appoinment-area py_8 pb-0">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="products">
-                        <div class="main_print_form">
-                            <img src="{{ asset('public/images/fill_out_form_img.webp') }}" alt="Brother">
-                            <!-- <img class="lazyload" data-src="{{ asset('public/images/about/fill_out_form_img.webp') }}" alt="printing_form"> -->
+                {{-- <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-box">
+                        <div class="single-blog-thumb">
+                            <img src="{{ asset('public/frontend/assets/images/home-two/blog-thu2.png') }}"
+                                alt="thumb">
+                            <div class="blog-meta-top">
+                                <a href="{{route('blog')}}">WEB DEVELOPER</a>
+                            </div>
+                        </div>
+                        <div class="blog-box-content">
+                            <div class="meta-blog">
+                                <a href="{{route('blog')}}"><span><i class="far fa-user"></i>HOSSAIN
+                                        ASIF</span></a>
+                                <p><span><img src="{{ asset('public/frontend/assets/images/home-two/mesage-icon.png') }}"
+                                            alt="icon"></span>COMMENTS</p>
+                            </div>
+                            <p><a href="{{route('blog')}}">The Complete Guide to Tekone
+                                    App Development
+                                </a></p>
+                            <div class="blog-button">
+                                <a class="btn-2" href="{{ route('blog') }}">read post</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="form-container">
-                        @include('partials.common-form', [
-                            'brands' => $brands,
-                            'serviceSlug' => $service->slug ?? '',
-                            'prefix' => 'service2',
-                        ])
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-box">
+                        <div class="single-blog-thumb">
+                            <img src="{{ asset('public/frontend/assets/images/home-two/blog-thu3.png') }}"
+                                alt="thumb">
+                            <div class="blog-meta-top">
+                                <a href="{{route('blog')}}">WEB DESIGNER</a>
+                            </div>
+                        </div>
+                        <div class="blog-box-content">
+                            <div class="meta-blog">
+                                <a href="{{route('blog')}}"><span><i class="far fa-user"></i>HOSSAIN
+                                        ASIF</span></a>
+                                <p><span><img src="{{ asset('public/frontend/assets/images/home-two/mesage-icon.png') }}"
+                                            alt="icon"></span>COMMENTS</p>
+                            </div>
+                            <h3><a href="{{route('blog')}}">Easy and Most Powerful Server
+                                    and Platform.
+                                </a></h3>
+                            <div class="blog-button">
+                                <a class="btn-2" href="{{ route('blog') }}">read post</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq-container py_8">
-        <div class="container">
-            <div class="row align-items-center">
-
-                <div class="col-md-6 mb-3">
-                    <div class="faq-content">
-                        <h2>Frequently Asked Questions</h2>
-
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>What types of printer issues do you handle?
-                                </span>
-                                <span class="icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>We address all serious printer issues, including spooler errors, driver issues,
-                                    connectivity problems, slow printing, and paper jams. We also offer professional printer
-                                    maintenance for optimal performance over the long term.</p>
-                            </div>
-                        </div>
-
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>Do you offer support for all printer brands?</span>
-                                <span class="icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Yes, we do offer printer support services for leading brands such as HP, Canon, Brother,
-                                    and Epson, among several others. Regardless of the printer model you're using, we're
-                                    here to assist you.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>How quickly can I get help for my printer issue?
-                                </span>
-                                <span class="icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Our 24/7 support team is here to assist you. The majority of issues are fixed within the
-                                    first call or session. We're dedicated to providing quick, live printer assistance
-                                    throughout the United States.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>Can you help with printer Wi-Fi and network setup?</span>
-                                <span class="icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Yes. Our expertise includes resolving printer connectivity problems, such as Wi-Fi
-                                    configuration, network printing, and re-establishing printers that continually go
-                                    offline.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>Is there a money-back guarantee if my issue isn’t fixed?</span>
-                                <span class="icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>Yes. If our team is unable to resolve your issue, we offer a full refund under our
-                                    printer support warranty — we prioritize customer satisfaction.</p>
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question" onclick="toggleFAQ(this)">
-                                <span>Do you offer regular maintenance or just one-time fixes?</span>
-                                <span class="icon">+</span>
-                            </div>
-                            <div class="faq-answer">
-                                <p>We provide both! You can call for an individual printer service or arrange regular
-                                    printer maintenance services to prevent future failures and ensure your equipment
-                                    continues to run efficiently.</p>
-                            </div>
-                        </div>
-                        <!-- Add more FAQ items as needed -->
-                    </div>
-                </div>
-
-                <div class="col-md-6 mb-3">
-                    <div class="faq_images">
-                        <img src="{{ asset('public/images/Customer_support.jpg') }}" alt="FAQ public/images">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-  @if ($orders->isNotEmpty())
-    @foreach ($orders as $index => $order)
-        <div class="notify-box popupBox" id="popupBox-{{ $index }}" style="display: none;">
-            <div class="printer-decor top-right"></div>
-            <div class="printer-decor bottom-left"></div>
-            <div class="notify-text">
-                <div class="notify-img">
-                    <img src="{{ asset('public/images/icons8-happy.gif') }}" alt="">
-                </div>
-                <div class="rating_pricing">
-                    <span class="name">🎉 {{ ucfirst($order->user->name) }} just subscribed!</span>
-
-                    @if ($order->amount)
-                        <span class="plan mb-1">💰 ${{ $order->amount }} Plan</span>
-                    @endif
-
-                    @if ($order->created_at)
-                        <span class="plan mb-1">🕒 {{ $order->created_at->diffForHumans() }}</span>
-                    @endif
-
-                    @if ($order->package->package_name)
-                        <span class="plan mb-1">📦 {{ $order->package->package_name }}</span>
-                    @endif
-                </div>
-            </div>
-        </div>
-    @endforeach
-@else
-    {{-- Fallback static random-like data --}}
-    @php
-        $fakeNames = ['jhon', 'Daniel', 'John', 'Sana', 'Emily',  'Suzan'];
-        $fakePackages = ['Starter', 'Pro', 'Enterprise', 'Business', 'Premium'];
-        $fakeAmounts = [279, 349, 189, 219, 149];
-        $fakeTimes = ['2 minutes ago', '10 minutes ago', '1 hour ago', 'Just now', '30 minutes ago'];
-        $fakeReviews = [
-            'Awesome support!',
-            'Highly recommended!',
-            'Very satisfied with the service.',
-            'Worth every penny!',
-            'Super fast setup!'
-        ];
-
-        for ($i = 0; $i < 3; $i++) {
-            $name = $fakeNames[array_rand($fakeNames)];
-            $package = $fakePackages[array_rand($fakePackages)];
-            $amount = $fakeAmounts[array_rand($fakeAmounts)];
-            $time = $fakeTimes[array_rand($fakeTimes)];
-            $review = $fakeReviews[array_rand($fakeReviews)];
-    @endphp
-
-
-    <div class="notify-box popupBox" id="popupBox-{{ $i }}" style="display: none;">
-        <div class="printer-decor top-right"></div>
-        <div class="printer-decor bottom-left"></div>
-        <div class="notify-text">
-            <div class="notify-img">
-                <img src="{{ asset('public/images/icons8-happy.gif') }}" alt="">
-            </div>
-            <div class="rating_pricing">
-                <span class="name">🎉 {{ $name }} just subscribed!</span>
-                <span class="plan mb-1">💰 ${{ $amount }} Plan</span>
-                <span class="plan mb-1">🕒 {{ $time }}</span>
-                <span class="plan mb-1">📦 {{ $package }}</span>
-                <span class="plan">💬 "{{ $review }}"</span>
+                </div> --}}
             </div>
         </div>
     </div>
 
-    @php } @endphp
-@endif
 
 
-    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content bg-dark">
-                <div class="modal-body p-0 position-relative">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                    <div class="ratio ratio-16x9">
-                        <iframe id="youtubeVideo" src="" title="YouTube video" allow="autoplay; encrypted-media"
-                            allowfullscreen></iframe>
+
+    <!--==================================================-->
+    <!-- end solutek blog Area -->
+    <!--==================================================-->
+
+
+
+
+
+
+    <!--==================================================-->
+    <!-- Start solutek address Area -->
+    <!--==================================================-->
+
+
+    <div class="address-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="address-box">
+                        <div class="address-icon">
+                            <img src="{{ asset('public/frontend/assets/images/address1.png') }}"
+                                alt="custom seo and web design">
+                        </div>
+                        <div class="address-title">
+                            <h3>Elevating Customer Experience.</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="address-box2">
+                        <div class="address-icon" style="font-size: 32px;  color: #fff;">
+                           <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="solutek-btn">
+                          <a href="mailto:contact@itcaredigital.com">contact@itcaredigital.com
+                                <div class="solutek-hover-btn hover-bx"></div>
+                                <div class="solutek-hover-btn hover-bx2"></div>
+                                <div class="solutek-hover-btn hover-bx3"></div>
+                                <div class="solutek-hover-btn hover-bx4"></div>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Success!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
-    <script>
-        $('#owl_1').owlCarousel({
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplayHoverPause: true,
-            smartSpeed: 3000,
-            slideTransition: 'linear',
-            items: 3,
-            autoplaySpeed: 5000,
-            dots: true,
-            nav: false,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 2
-                },
-                1000: {
-                    items: 3
-                }
-            }
-        });
-    </script>
 
 
-    <script>
-        function openPopup() {
-            const popup = document.getElementById('videoPopup');
-            const video = document.getElementById('youtubeVideo');
-            video.src = "https://www.youtube.com/embed/JIDRK9gzTO0?autoplay=1";
-            popup.style.display = 'flex';
-        }
 
-        function closePopup() {
-            const popup = document.getElementById('videoPopup');
-            const video = document.getElementById('youtubeVideo');
-            video.src = "";
-            popup.style.display = 'none';
-        }
-    </script>
+
+    <!--==================================================-->
+    <!-- end solutek address Area -->
+    <!--==================================================-->
+
+
+
 
 
 @endsection

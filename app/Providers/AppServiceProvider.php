@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Models\Brand;
+ 
 use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,16 +20,5 @@ class AppServiceProvider extends ServiceProvider
      */
 
 
-public function boot()
-{
-    View::composer('*', function ($view) {
-        $brands = Brand::where('status', 'active')
-                       ->with(['services' => function ($query) {
-                           $query->where('status', 'active');
-                       }])
-                       ->get();
-        $view->with('brands', $brands);
-    });
-    
-}
+ 
 }

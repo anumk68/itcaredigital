@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /privacy-policy
+Disallow: /terms-of-service
+
+Sitemap: https://itcaredigital.com/sitemap.xml
